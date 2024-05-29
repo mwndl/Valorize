@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Simulador</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="top">
+        <!-- Conteúdo do topo -->
+    </div>
+    <div class="main">
+        <div class="message">
+            <h1>Simulador de Renda Fixa</h1>
+            <p>Utilize nossa calculadora de renda fixa abaixo</p>
+        </div>
+        <div class="simulator">
+            <div class="simulator_top">
+                <div class="simulator_section">
+                    <div class="simulator_section_intern">
+                        <label class="google_label" for="inicial">Investimento Inicial</label>
+                        <div class="google_input_wrapper">
+                            <div class="google_prefix">R$</div>
+                            <input id="valor_inicial" type="text" class="google_input" name="initial_investment"
+                                placeholder="0,00">
+                        </div>
+                    </div>
+                    <div class="simulator_section_intern">
+                        <label class="google_label" for="inicial">Aporte Mensal</label>
+                        <div class="google_input_wrapper">
+                            <div class="google_prefix">R$</div>
+                            <input id="valor_mensal" type="text" class="google_input" name="initial_investment"
+                                placeholder="0,00">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simulator_section">
+                <div class="simulator_section_intern">
+                    <p style="text-align: start; font-size: 22px;">Qual o tipo de investimento?</p>
+                    <div class="option">
+                        <input type="radio" id="cdb_radio" name="investimento_tipo" value="cdb_radio">
+                        <label for="cdb_radio">CDB, LC ou Títulos Públicos</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="lci_radio" name="investimento_tipo" value="lci_radio">
+                        <label for="lci_radio">LCI / LCA</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="tesouro_radio" name="investimento_tipo" value="tesouro_radio">
+                        <label for="tesouro_radio">Tesouro Selic</label>
+                    </div>
+                    <div class="option" style="display:none">
+                        <input type="radio" id="poupanca_radio" name="investimento_tipo" value="poupanca_radio">
+                        <label for="poupanca_radio">Poupança</label>
+                    </div>
+                </div>
+                <div class="simulator_section_intern">
+                    <p style="text-align: start; font-size: 22px;">Tipo de rentabilidade</p>
+                    <div class="option">
+                        <input type="radio" id="pos_radio" name="rentabilidade_tipo" value="pos_radio">
+                        <label for="pos_radio">Pós-fixado</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="pre_radio" name="rentabilidade_tipo" value="pre_radio">
+                        <label for="pre_radio">Pré-fixado</label>
+                    </div>
+                    <div class="option" style="display:none">
+                        <input type="radio" id="ipca_radio" name="rentabilidade_tipo" value="ipca_radio">
+                        <label for="ipca_radio">IPCA</label>
+                    </div>
+                </div>
+            </div>
+            <div class="simulator_main">
+                <div class="simulator_section">
+                    <div class="simulator_section_intern">
+                        <label class="google_label" for="inicial">Prazo</label>
+                        <div class="google_input_wrapper">
+                            <input id="prazo" type="text" class="google_input" name="initial_investment"
+                                placeholder="0">
+                            <select id="time_period" name="time_period">
+                                <option value="2">Anos</option>
+                                <option value="1">Meses</option>
+                                <option value="0">Dias</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="simulator_section_intern" id="rent_pos" style="display:none">
+                        <label class="google_label" for="inicial">% do CDI</label>
+                        <div class="google_input_wrapper">
+                            <div class="google_prefix">%</div>
+                            <input id="rent_input_pos" type="text" class="google_input" name="initial_investment"
+                                placeholder="0,00">
+                        </div>
+                    </div>
+                    <div class="simulator_section_intern" id="rent_pre" style="display:none">
+                        <label class="google_label" for="inicial">Rentabilidade Anual</label>
+                        <div class="google_input_wrapper">
+                            <div class="google_prefix">%</div>
+                            <input id="rent_input_pre" type="text" class="google_input" name="initial_investment"
+                                placeholder="0,00">
+                        </div>
+                    </div>
+                    <div class="simulator_section_intern" id="rent_ipca" style="display:none">
+                        <label class="google_label" for="inicial">IPCA + X%</label>
+                        <div class="google_input_wrapper">
+                            <div class="google_prefix">%</div>
+                            <input id="rent_input_ipca" type="text" class="google_input" name="initial_investment"
+                                placeholder="0,00">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="simulator_bottom">
+                    <div class="simularButton" id="simularButton">Simular</div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+        <div id="notification" class="hidden">
+            <div class="notification-content">
+                <p id="notification-message"></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <!-- Conteúdo do rodapé -->
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
