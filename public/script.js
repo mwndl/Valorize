@@ -246,12 +246,12 @@ function calcularInvestimento() {
             imposto = Math.round(imposto * 100) / 100;
 
             // Exibindo os totais
-            let mensagem = "Valor total bruto após " + prazoDias + " dias: " + montanteFinal + "\n";
-            mensagem += "Total investido: " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: " + imposto + "\n";
+            let mensagem = "Valor total bruto após " + prazoDias + " dias: R$ " + montanteFinal + "\n";
+            mensagem += "Total investido: R$ " + totalInvestido + "\n";
+            mensagem += "Impostos pagos: R$ " + imposto + "\n";
             mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: " + (montanteFinal - imposto) + "\n";
+            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
+            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
 
             alert(mensagem);
 
@@ -314,12 +314,12 @@ function calcularInvestimento() {
             imposto = Math.round(imposto * 100) / 100;
 
             // Exibindo os totais
-            let mensagem = "Valor total bruto após " + prazoDias + " dias: " + montanteFinal + "\n";
-            mensagem += "Total investido: " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: " + imposto + "\n";
+            let mensagem = "Valor total bruto após " + prazoDias + " dias: R$ " + montanteFinal + "\n";
+            mensagem += "Total investido: R$ " + totalInvestido + "\n";
+            mensagem += "Impostos pagos: R$ " + imposto + "\n";
             mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: " + (montanteFinal - imposto) + "\n";
+            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
+            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
 
             alert(mensagem);
             // rentabilidade ipca
@@ -368,9 +368,9 @@ function calcularInvestimento() {
             var prazoDias = prazoFinal * 30;
 
             // Exibindo os totais
-            let mensagem = "Valor total após " + prazoDias + " dias: " + montanteFinal + "\n";
-            mensagem += "Total investido: " + totalInvestido + "\n";
-            mensagem += "Rendimento: " + (rentabilidade) + "\n";
+            let mensagem = "Valor total após " + prazoDias + " dias: R$ " + montanteFinal + "\n";
+            mensagem += "Total investido: R$ " + totalInvestido + "\n";
+            mensagem += "Rendimento: R$ " + (rentabilidade) + "\n";
 
             alert(mensagem);
 
@@ -405,9 +405,9 @@ function calcularInvestimento() {
             var rentabilidade = totalBruto - totalInvestido;
 
             // Exibindo os totais
-            let mensagem = "Valor total após " + prazoDias + " dias: " + montanteFinal + "\n";
-            mensagem += "Total investido: " + totalInvestido + "\n";
-            mensagem += "Rendimento: " + (rentabilidade) + "\n";
+            let mensagem = "Valor total após " + prazoDias + " dias: R$ " + montanteFinal + "\n";
+            mensagem += "Total investido: R$ " + totalInvestido + "\n";
+            mensagem += "Rendimento: R$ " + (rentabilidade) + "\n";
             var prazoDias = prazoFinal * 30;
 
             alert(mensagem);
@@ -477,12 +477,12 @@ function calcularInvestimento() {
             imposto = Math.round(imposto * 100) / 100;
 
             // Exibindo os totais
-            let mensagem = "Valor total bruto após " + prazoDias + " dias: " + montanteFinal + "\n";
-            mensagem += "Total investido: " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: " + imposto + "\n";
+            let mensagem = "Valor total bruto após " + prazoDias + " dias: R$ " + montanteFinal + "\n";
+            mensagem += "Total investido: R$ " + totalInvestido + "\n";
+            mensagem += "Impostos pagos: R$ " + imposto + "\n";
             mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: " + (montanteFinal - imposto) + "\n";
+            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
+            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
 
             alert(mensagem);
 
@@ -538,12 +538,12 @@ function calcularInvestimento() {
             imposto = Math.round(imposto * 100) / 100;
 
             // Exibindo os totais
-            let mensagem = "Valor total bruto após " + prazoDias + " dias: " + montanteFinal + "\n";
-            mensagem += "Total investido: " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: " + imposto + "\n";
+            let mensagem = "Valor total bruto após " + prazoDias + " dias: R$ " + montanteFinal + "\n";
+            mensagem += "Total investido: R$ " + totalInvestido + "\n";
+            mensagem += "Impostos pagos: R$ " + imposto + "\n";
             mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: " + (montanteFinal - imposto) + "\n";
+            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
+            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
 
             alert(mensagem);
 
