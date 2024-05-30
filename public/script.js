@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
 });
 
@@ -129,7 +129,69 @@ async function getSelic() {
     }
 }
 
-function calcularInvestimento() {
+function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidade, calcularImposto) {
+
+    valorInicial = valorInicial || 0;
+    valorMensal = valorMensal || 0;
+
+    // calcula a rentabilidade mensal com base na anual
+    var rentabFinal = rentabilidade / 100;
+    var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
+
+    // calcuma o valor futuro dos depósitos mensais
+    var montanteFinal = 0;
+    for (var i = 1; i <= prazoMeses; i++) {
+        montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoMeses - i);
+    }
+
+    // add o valor futuro do investimento inicial
+    montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoMeses);
+
+    // arredonda para duas casas decimais
+    montanteFinal = Math.round(montanteFinal * 100) / 100;
+
+    // calcula o total bruto, o total investido e a rentabilidade
+    var totalBruto = montanteFinal;
+    var totalInvestido = valorInicial + (valorMensal * prazoMeses);
+    var rentabilidade = totalBruto - totalInvestido;
+
+    // calcula o imposto
+    var aliquotaImposto = 0;
+    var imposto = 0;
+    var prazoDias = prazoMeses * 30;
+
+    if (calcularImposto) {
+        if (prazoDias < 180) {
+            aliquotaImposto = 22.5;
+            imposto = rentabilidade * 0.225;
+        } else if (prazoDias < 360) {
+            aliquotaImposto = 20;
+            imposto = rentabilidade * 0.20;
+        } else if (prazoDias < 720) {
+            aliquotaImposto = 17.5;
+            imposto = rentabilidade * 0.175;
+        } else {
+            aliquotaImposto = 15;
+            imposto = rentabilidade * 0.15;
+        }
+
+        // arredonda o imposto para duas casas decimais
+        imposto = Math.round(imposto * 100) / 100;
+    }
+
+    // Exibindo os totais
+    let mensagem = "Valor total bruto: R$ " + montanteFinal + "\n";
+    mensagem += "Total investido: R$ " + totalInvestido + "\n";
+    mensagem += "Impostos pagos: R$ " + imposto + "\n";
+    mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
+    mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
+    mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
+
+    alert(mensagem);
+
+}
+
+function handleSimulation() {
     function converterParaFloat(valor) {
         // Remove o '.' que separa a casa milhar
         valor = valor.replace('.', '');
@@ -147,9 +209,6 @@ function calcularInvestimento() {
     var prazoTipo = document.getElementById('time_period').value;
     var tipoInvestimentoElement = document.querySelector('input[name="investimento_tipo"]:checked');
     var tipoRentabilidadeElement = document.querySelector('input[name="rentabilidade_tipo"]:checked');
-
-    var valorInicial = converterParaFloat(document.getElementById('valor_inicial').value);
-    var valorMensal = converterParaFloat(document.getElementById('valor_mensal').value);
 
 
     if (tipoInvestimentoElement) {
@@ -190,10 +249,10 @@ function calcularInvestimento() {
     valorInicial = valorInicial || 0;
     valorMensal = valorMensal || 0;
 
-    // CBDs 
+    /* CDBs */
     if (tipoInvestimento === "cdb_radio") {
 
-        // rentabilidade pós-fixada
+        /* CDB PÓS-FIXADO */
         if (tipoRentabilidade === "pos_radio") {
 
             if (!rentabilidadePos) {
@@ -203,60 +262,13 @@ function calcularInvestimento() {
 
             // calcula a rentabilidade mensal com base na anual
             var cdiValue = selicValue - 0.1;
-            var rentabilidadeAntes = rentabilidadePos * cdiValue / 100;
-            var rentabFinal = rentabilidadeAntes / 100;
-            var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
+            var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            // calcuma o valor futuro dos depósitos mensais
-            var montanteFinal = 0;
-            for (var i = 1; i <= prazoFinal; i++) {
-                montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoFinal - i);
-            }
-
-            // add o valor futuro do investimento inicial
-            montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoFinal);
-
-            // arredonda para duas casas decimais
-            montanteFinal = Math.round(montanteFinal * 100) / 100;
-
-            // calcula o total bruto, o total investido e a rentabilidade
-            var totalBruto = montanteFinal;
-            var totalInvestido = valorInicial + (valorMensal * prazoFinal);
-            var rentabilidade = totalBruto - totalInvestido;
-
-            // calcula o imposto
-            var aliquotaImposto = 0;
-            var imposto = 0;
-            var prazoDias = prazoFinal * 30;
-            if (prazoDias < 180) {
-                aliquotaImposto = 22.5;
-                imposto = rentabilidade * 0.225;
-            } else if (prazoDias < 360) {
-                aliquotaImposto = 20;
-                imposto = rentabilidade * 0.20;
-            } else if (prazoDias < 720) {
-                aliquotaImposto = 17.5;
-                imposto = rentabilidade * 0.175;
-            } else {
-                aliquotaImposto = 15;
-                imposto = rentabilidade * 0.15;
-            }
-
-            // arredonda o imposto para duas casas decimais
-            imposto = Math.round(imposto * 100) / 100;
-
-            // Exibindo os totais
-            let mensagem = "Valor total bruto: R$ " + montanteFinal + "\n";
-            mensagem += "Total investido: R$ " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: R$ " + imposto + "\n";
-            mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
-
-            alert(mensagem);
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, true)
 
 
-            // rentabilidade pós-fixada
+
+            /* CDB PRÉ-FIXADO */
         } else if (tipoRentabilidade === "pre_radio") {
 
             if (!rentabilidadePre) {
@@ -264,78 +276,24 @@ function calcularInvestimento() {
                 return
             }
 
-            /*
-            var valorInicial = 10000; // investimento inicial
-            var valorMensal = 1000; // investimento mensal
-            var rentabilidadePre = 10; // rentabilidade anual em porcentagem
-            var prazoFinal = 24; // duração em meses
-            */
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, true)
 
-            // calcula a rentabilidade mensal com base na anual
-            var rentabFinal = rentabilidadePre / 100;
-            var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
-
-            // calcuma o valor futuro dos depósitos mensais
-            var montanteFinal = 0;
-            for (var i = 1; i <= prazoFinal; i++) {
-                montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoFinal - i);
-            }
-
-            // add o valor futuro do investimento inicial
-            montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoFinal);
-
-            // arredonda para duas casas decimais
-            montanteFinal = Math.round(montanteFinal * 100) / 100;
-
-            // calcula o total bruto, o total investido e a rentabilidade
-            var totalBruto = montanteFinal;
-            var totalInvestido = valorInicial + (valorMensal * prazoFinal);
-            var rentabilidade = totalBruto - totalInvestido;
-
-            // calcula o imposto
-            var aliquotaImposto = 0;
-            var imposto = 0;
-            var prazoDias = prazoFinal * 30;
-            if (prazoDias < 180) {
-                aliquotaImposto = 22.5;
-                imposto = rentabilidade * 0.225;
-            } else if (prazoDias < 360) {
-                aliquotaImposto = 20;
-                imposto = rentabilidade * 0.20;
-            } else if (prazoDias < 720) {
-                aliquotaImposto = 17.5;
-                imposto = rentabilidade * 0.175;
-            } else {
-                aliquotaImposto = 15;
-                imposto = rentabilidade * 0.15;
-            }
-
-            // arredonda o imposto para duas casas decimais
-            imposto = Math.round(imposto * 100) / 100;
-
-            // Exibindo os totais
-            let mensagem = "Valor total bruto: R$ " + montanteFinal + "\n";
-            mensagem += "Total investido: R$ " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: R$ " + imposto + "\n";
-            mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
-
-            alert(mensagem);
-            // rentabilidade ipca
+            /* CDB IPCA */
         } else if (tipoRentabilidade === "ipca_radio") {
 
             if (!rentabilidadeIpca) {
                 notification("Defina a rentabilidade do investimento")
                 return
             }
+
             notification("Essa opção ainda está sendo desenvolvida")
 
         }
 
+        /* LCIs */
     } else if (tipoInvestimento === "lci_radio") {
 
-        // rentabilidade pós-fixada
+        /* LCI PÓS-FIXADO */
         if (tipoRentabilidade === "pos_radio") {
 
             if (!rentabilidadePos) {
@@ -345,34 +303,9 @@ function calcularInvestimento() {
 
             // calcula a rentabilidade mensal com base na anual
             var cdiValue = selicValue - 0.1;
-            var rentabilidadeAntes = rentabilidadePos * cdiValue / 100;
-            var rentabFinal = rentabilidadeAntes / 100;
-            var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
+            var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            // calcuma o valor futuro dos depósitos mensais
-            var montanteFinal = 0;
-            for (var i = 1; i <= prazoFinal; i++) {
-                montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoFinal - i);
-            }
-
-            // add o valor futuro do investimento inicial
-            montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoFinal);
-
-            // arredonda para duas casas decimais
-            montanteFinal = Math.round(montanteFinal * 100) / 100;
-
-            // calcula o total bruto, o total investido e a rentabilidade
-            var totalBruto = montanteFinal;
-            var totalInvestido = valorInicial + (valorMensal * prazoFinal);
-            var rentabilidade = totalBruto - totalInvestido;
-            var prazoDias = prazoFinal * 30;
-
-            // Exibindo os totais
-            let mensagem = "Valor total: R$ " + montanteFinal + "\n";
-            mensagem += "Total investido: R$ " + totalInvestido + "\n";
-            mensagem += "Rendimento: R$ " + (rentabilidade) + "\n";
-
-            alert(mensagem);
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, false)
 
 
             // rentabilidade pós-fixada
@@ -383,34 +316,7 @@ function calcularInvestimento() {
                 return
             }
 
-            // calcula a rentabilidade mensal com base na anual
-            var rentabFinal = rentabilidadePre / 100;
-            var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
-
-            // calcuma o valor futuro dos depósitos mensais
-            var montanteFinal = 0;
-            for (var i = 1; i <= prazoFinal; i++) {
-                montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoFinal - i);
-            }
-
-            // add o valor futuro do investimento inicial
-            montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoFinal);
-
-            // arredonda para duas casas decimais
-            montanteFinal = Math.round(montanteFinal * 100) / 100;
-
-            // calcula o total bruto, o total investido e a rentabilidade
-            var totalBruto = montanteFinal;
-            var totalInvestido = valorInicial + (valorMensal * prazoFinal);
-            var rentabilidade = totalBruto - totalInvestido;
-
-            // Exibindo os totais
-            let mensagem = "Valor total: R$ " + montanteFinal + "\n";
-            mensagem += "Total investido: R$ " + totalInvestido + "\n";
-            mensagem += "Rendimento: R$ " + (rentabilidade) + "\n";
-            var prazoDias = prazoFinal * 30;
-
-            alert(mensagem);
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, true)
 
         } else if (tipoRentabilidade === "ipca_radio") {
 
@@ -418,6 +324,7 @@ function calcularInvestimento() {
                 notification("Defina a rentabilidade do investimento")
                 return
             }
+
             notification("Essa opção ainda está sendo desenvolvida")
 
         }
@@ -434,57 +341,9 @@ function calcularInvestimento() {
 
             // calcula a rentabilidade mensal com base na anual
             var cdiValue = selicValue - 0.1;
-            var rentabilidadeAntes = rentabilidadePos * cdiValue / 100;
-            var rentabFinal = rentabilidadeAntes / 100;
-            var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
+            var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            // calcuma o valor futuro dos depósitos mensais
-            var montanteFinal = 0;
-            for (var i = 1; i <= prazoFinal; i++) {
-                montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoFinal - i);
-            }
-
-            // add o valor futuro do investimento inicial
-            montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoFinal);
-
-            // arredonda para duas casas decimais
-            montanteFinal = Math.round(montanteFinal * 100) / 100;
-
-            // calcula o total bruto, o total investido e a rentabilidade
-            var totalBruto = montanteFinal;
-            var totalInvestido = valorInicial + (valorMensal * prazoFinal);
-            var rentabilidade = totalBruto - totalInvestido;
-
-            // calcula o imposto
-            var aliquotaImposto = 0;
-            var imposto = 0;
-            var prazoDias = prazoFinal * 30;
-            if (prazoDias < 180) {
-                aliquotaImposto = 22.5;
-                imposto = rentabilidade * 0.225;
-            } else if (prazoDias < 360) {
-                aliquotaImposto = 20;
-                imposto = rentabilidade * 0.20;
-            } else if (prazoDias < 720) {
-                aliquotaImposto = 17.5;
-                imposto = rentabilidade * 0.175;
-            } else {
-                aliquotaImposto = 15;
-                imposto = rentabilidade * 0.15;
-            }
-
-            // arredonda o imposto para duas casas decimais
-            imposto = Math.round(imposto * 100) / 100;
-
-            // Exibindo os totais
-            let mensagem = "Valor total: R$ " + montanteFinal + "\n";
-            mensagem += "Total investido: R$ " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: R$ " + imposto + "\n";
-            mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
-
-            alert(mensagem);
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, true)
 
             // rentabilidade pós-fixada
         } else if (tipoRentabilidade === "pre_radio") {
@@ -494,58 +353,7 @@ function calcularInvestimento() {
                 return
             }
 
-            // calcula a rentabilidade mensal com base na anual
-            var rentabFinal = rentabilidadePre / 100;
-            var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
-
-            // calcuma o valor futuro dos depósitos mensais
-            var montanteFinal = 0;
-            for (var i = 1; i <= prazoFinal; i++) {
-                montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoFinal - i);
-            }
-
-            // add o valor futuro do investimento inicial
-            montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoFinal);
-
-            // arredonda para duas casas decimais
-            montanteFinal = Math.round(montanteFinal * 100) / 100;
-
-            // calcula o total bruto, o total investido e a rentabilidade
-            var totalBruto = montanteFinal;
-            var totalInvestido = valorInicial + (valorMensal * prazoFinal);
-            var rentabilidade = totalBruto - totalInvestido;
-
-            // calcula o imposto
-            var aliquotaImposto = 0;
-            var imposto = 0;
-            var prazoDias = prazoFinal * 30;
-
-            if (prazoDias < 180) {
-                aliquotaImposto = 22.5;
-                imposto = rentabilidade * 0.225;
-            } else if (prazoDias < 360) {
-                aliquotaImposto = 20;
-                imposto = rentabilidade * 0.20;
-            } else if (prazoDias < 720) {
-                aliquotaImposto = 17.5;
-                imposto = rentabilidade * 0.175;
-            } else {
-                aliquotaImposto = 15;
-                imposto = rentabilidade * 0.15;
-            }
-
-            // arredonda o imposto para duas casas decimais
-            imposto = Math.round(imposto * 100) / 100;
-
-            // Exibindo os totais
-            let mensagem = "Valor total bruto: R$ " + montanteFinal + "\n";
-            mensagem += "Total investido: R$ " + totalInvestido + "\n";
-            mensagem += "Impostos pagos: R$ " + imposto + "\n";
-            mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-            mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
-            mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
-
-            alert(mensagem);
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, true)
 
         } else if (tipoRentabilidade === "ipca_radio") {
 
@@ -563,4 +371,4 @@ function calcularInvestimento() {
 }
 
 // Calcular investimento ao clicar no botão "Simular"
-document.getElementById('simularButton').addEventListener('click', calcularInvestimento);
+document.getElementById('simularButton').addEventListener('click', handleSimulation);

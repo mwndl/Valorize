@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Valorize | Simulador Renda Fixa</title>
+        <link rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <div class="top">
+            <!-- Conteúdo do topo -->
+        </div>
+        <div class="main">
+            <div class="message">
+                <h1>Resultados da Simulação</h1>
+            </div>
+            <div class="simulator">
+                <div class="resultado_container">
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Valor Bruto</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">R$ 38.435,13</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Total Investido</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">R$ 34.000,00</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Rendimento em Juros</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">R$ 4.435,12</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Alíquota IR</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">15 %</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Imposto de Renda</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">R$ 665,27</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Total Líquido</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">R$ 37.769,89</p>
+                            </div>
+                        </div>
+                </div>
+                <div class="simulator_section">
+                    <div class="grafico">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="notification" class="hidden">
+                <div class="notification-content">
+                    <p id="notification-message"></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="https://github.com/mwndl/Valorize" target="_blank">
+                <div class="github_icon" title="Visualizar repositório no GibHub"></div>
+            </a>
+            <p>Developed by <span title="Abrir LinkedIn"><a href="https://www.linkedin.com/in/marcoswiendl/" target="_blank">Marcos Wiendl</a></span></p>
+        </div>
+    </div>
+    <script>
+    // Dados para o gráfico de pizza
+    var data = {
+      labels: ["Valor Investido", "Rendimentos", "Tributos"],
+      datasets: [{
+        data: [55, 40, 5], // Valores para cada fatia
+        backgroundColor: ["#007bff", "#2ECC71", "#E74C3C"] // Cores para cada fatia
+      }]
+    };
+
+    // Configurações do gráfico
+    var options = {
+      responsive: true,
+      maintainAspectRatio: false, // Isso evita que o gráfico mantenha uma relação de aspecto específica
+      plugins: {
+        legend: {
+          display: false // Isso remove a legenda
+        }
+      }
+    };
+
+    // Obtém o contexto do canvas
+    var ctx = document.getElementById("myPieChart").getContext("2d");
+
+    // Cria o gráfico de pizza
+    var myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: options
+    });
+      </script>
+</body>
+</html>

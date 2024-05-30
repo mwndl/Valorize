@@ -1,33 +1,65 @@
 /* Estilos padrão (modo claro e escuro) */
 body {
-    background-color: #f2f2f2;
+    background-color: #fafafa;
     color: black;
     margin: 0;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 h1, p {
     color: #252525;
 }
 
-/* ELEMENTOS PRINCIPAIS */
-.top, .main, .footer {
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.top {
+    padding: 20px;
+    text-align: center;
+    height: 30px;
+}
+
+.main {
     padding: 20px;
     text-align: center;
 }
 
-.top {
-    height: 30px;
-    /*background-color: #007bff;*/
-}
-
-.main {
-
-}
-
 .footer {
-    height: 30px;
+    margin-top: auto;
+    background-color: #fbfbfb;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 12px 20px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.footer a {
+    color: #252525;
+    text-decoration: none;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.github_icon {
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+    background-image: url('/images/github_dark.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .main h1 {
@@ -83,7 +115,7 @@ h1, p {
     padding: 5px 15px;
     max-width: 800px;
     margin: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 11px 34px 0 rgba(0, 0, 0, .2);
 }
 
 .simulator_section {
@@ -184,6 +216,33 @@ h1, p {
     background-color: #585858;
 }
 
+
+/* RESULTADOS */
+
+.resultado_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+    padding: 10px 5px;
+}
+
+.resultado_container_section {
+    border: 1px solid #000; /* Borda preta de 1px */
+    padding: 10px; /* Espaçamento interno */
+    text-align: center; /* Centralizar texto */
+}
+
+
+.resultado_section_intern {
+    margin-bottom: 10px;
+    box-sizing: border-box; /* inclui padding e borda na largura */
+    position: relative;
+    margin: 10px 0;
+}
+
+/* ********** */
+
+
 /* Estilos responsivos para dispositivos móveis */
 @media (max-width: 700px) {
     .main h1 {
@@ -218,9 +277,19 @@ h1, p {
         font-size: 1.5em;
     }
 
-    .top, .main, .footer {
+    .top, .main {
         padding: 30px;
     }
+}
+
+.resultado_box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    justify-content: center;
 }
 
 
@@ -228,7 +297,7 @@ h1, p {
     position: relative;
     display: flex;
     align-items: center;
-    border: 2px solid #ccc;
+    border: 2px solid #cccccc;
     border-radius: 8px;
     width: 100%;
     transition: border-color 0.3s ease;
@@ -278,6 +347,7 @@ h1, p {
 .simulator_section_intern {
     margin: 20px 0;
 }
+
 .option {
     display: flex;
     align-items: center;
@@ -334,6 +404,10 @@ h1, p {
     #time_period {
         background-color: #272727;
         color: #c7c7c7;
+    }
+
+    .resultado_box {
+        border: 2px solid #c7c7c7;
     }
 
     .google_input_wrapper {
@@ -399,6 +473,19 @@ h1, p {
     
     .notification-content p {
         color: #2a2a2a;
+    }
+
+    .footer {
+        background-color: #282c34;
+        color: white;
+    }
+
+    .footer a {
+        color: white;
+    }
+
+    .github_icon {
+        background-image: url('/images/guthub_light.svg');
     }
 
 
