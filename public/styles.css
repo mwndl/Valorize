@@ -84,7 +84,7 @@ h1, p {
     height: 40px;
     width: 40px;
     vertical-align: middle;
-    background-image: url('/images/arrow_down_light.svg');
+    background-image: url('/images/arrow_down_dark.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
@@ -542,7 +542,7 @@ h1, p {
     }
 
     .arrow_down {
-        background-image: url('/images/arrow_down_dark.svg');
+        background-image: url('/images/arrow_down_light.svg');
     }
     
 }
