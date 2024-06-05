@@ -2,6 +2,22 @@ document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
 });
 
+/* SISTEMA DE OCULTAR SIMULADORES */
+var divSimulator = document.querySelector('.simulator');
+var divSimularNovamente = document.querySelector('#simular_novamente');
+var divResultados = document.querySelector('#simulador_resultados')
+
+divSimularNovamente.addEventListener('click', function() {
+    divSimularNovamente.style.display = 'none'
+    divResultados.style.display = 'none'
+
+    if (divSimulator.style.display === 'none') {
+        divSimulator.style.display = 'block';
+    }
+});
+
+/*  ************************ */
+
 function notification(customMessage) {
     const notification_div = document.getElementById("notification");
     const message = document.getElementById("notification-message");
@@ -105,6 +121,11 @@ function showRentInputs() {
     }
 }
 
+function converterReais(valor) {
+    // Utiliza toLocaleString para formatar o número
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
 let selicValue; // Definindo a variável global
 
 async function getSelic() {
@@ -179,15 +200,25 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
         imposto = Math.round(imposto * 100) / 100;
     }
 
-    // Exibindo os totais
-    let mensagem = "Valor total bruto: R$ " + montanteFinal + "\n";
-    mensagem += "Total investido: R$ " + totalInvestido + "\n";
-    mensagem += "Impostos pagos: R$ " + imposto + "\n";
-    mensagem += "Alíquota do imposto: " + aliquotaImposto + "%\n";
-    mensagem += "Rendimento líquido: R$ " + (rentabilidade - imposto) + "\n";
-    mensagem += "Total líquido: R$ " + (montanteFinal - imposto) + "\n";
+    /* EXIBINDO OS TOTAis */ 
+    var valorBrutoDiv = document.getElementById('valor_bruto');
+    var totalInvestidoDiv = document.getElementById('total_investido');
+    var rendimentoJurosDiv = document.getElementById('rendimento_juros');
+    var aliquotaDiv = document.getElementById('aliquota_ir');
+    var impostoRendaDiv = document.getElementById('imposto_renda');
+    var totalLiquidoDiv = document.getElementById('total_liquido');
 
-    alert(mensagem);
+    valorBrutoDiv.textContent = converterReais(montanteFinal);
+    totalInvestidoDiv.textContent = converterReais(totalInvestido);
+    rendimentoJurosDiv.textContent = converterReais(rentabilidade - imposto);
+    aliquotaDiv.textContent = `${aliquotaImposto} %`;
+    impostoRendaDiv.textContent = converterReais(imposto);
+    totalLiquidoDiv.textContent = converterReais(montanteFinal - imposto);
+
+    divSimulator.style.display = 'none';
+    divSimularNovamente.style.display = 'flex';
+    divResultados.style.display = 'block';
+
 
 }
 
@@ -305,7 +336,7 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, false)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade)
 
 
             // rentabilidade pós-fixada
@@ -316,7 +347,7 @@ function handleSimulation() {
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre)
 
         } else if (tipoRentabilidade === "ipca_radio") {
 
@@ -343,7 +374,7 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, 'true')
 
             // rentabilidade pós-fixada
         } else if (tipoRentabilidade === "pre_radio") {
@@ -353,7 +384,7 @@ function handleSimulation() {
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, 'true')
 
         } else if (tipoRentabilidade === "ipca_radio") {
 

@@ -19,9 +19,7 @@ h1, p {
 }
 
 .top {
-    padding: 20px;
     text-align: center;
-    height: 30px;
 }
 
 .main {
@@ -42,9 +40,29 @@ h1, p {
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.footer a {
-    color: #252525;
-    text-decoration: none;
+.footer_link {
+    color: #252525; 
+    text-decoration: none; 
+    position: relative;
+}
+
+/* Pseudo-elemento para criar o sublinhado */
+.footer_link::after {
+    content: '';
+    position: absolute; 
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #595959;
+    transform: scaleX(0);
+    transform-origin: bottom right; 
+    transition: transform 0.3s ease;
+}
+
+.footer_link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left; 
 }
 
 .footer p {
@@ -57,6 +75,16 @@ h1, p {
     width: 50px;
     vertical-align: middle;
     background-image: url('/images/github_dark.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.arrow_down {
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;
+    background-image: url('/images/arrow_down_light.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
@@ -108,6 +136,27 @@ h1, p {
 
 
 /* SIMULADOR */
+
+.arrow-up {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow-down {
+    transition: transform 0.3s ease-in-out;
+}
+
+.main_simulator_div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#simular_novamente {
+    justify-content:space-between; 
+    display: flex; 
+    padding: 20px 15px;
+}
 
 .simulator {
     background-color: #ffffff;
@@ -277,7 +326,7 @@ h1, p {
         font-size: 1.5em;
     }
 
-    .top, .main {
+    .main {
         padding: 30px;
     }
 }
@@ -480,16 +529,22 @@ h1, p {
         color: white;
     }
 
-    .footer a {
-        color: white;
-    }
-
     .github_icon {
-        background-image: url('/images/guthub_light.svg');
+        background-image: url('/images/github_light.svg');
     }
 
+    .footer_link {
+        color: #ffffff; 
+    }
+    
+    /* Pseudo-elemento para criar o sublinhado */
+    .footer_link::after {
+        background-color: #ffffff;
+    }
 
-
-
+    .arrow_down {
+        background-image: url('/images/arrow_down_light.svg');
+    }
+    
 }
 

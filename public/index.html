@@ -19,7 +19,7 @@
                 <h1>Simulador de Renda Fixa</h1>
                 <p>Utilize nossa calculadora de renda fixa abaixo</p>
             </div>
-            <div class="simulator">
+            <div class="simulator" id="simulator">
                 <div class="simulator_top">
                     <div class="simulator_section">
                         <div class="simulator_section_intern">
@@ -123,8 +123,49 @@
                     </div>
                 </div>
             </div>
-            <div>
-    
+            <div class="simulator" id="simular_novamente" style="display: none; font-size: 18px; align-items: center;">
+                <span>Simular novamente</span>
+                <div class="arrow_down"></div>
+              </div>
+            <div class="simulator" id="simulador_resultados" style="margin-top: 20px; display:none">
+                <div class="resultado_container">
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Valor Bruto</label>
+                            <div class="resultado_box">
+                                <p id="valor_bruto">-</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Total Investido</label>
+                            <div class="resultado_box">
+                                <p id="total_investido">-</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Rendimento em Juros</label>
+                            <div class="resultado_box">
+                                <p id="rendimento_juros">-</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Alíquota IR</label>
+                            <div class="resultado_box">
+                                <p id="aliquota_ir">-</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Imposto de Renda</label>
+                            <div class="resultado_box">
+                                <p id="imposto_renda">-</p>
+                            </div>
+                        </div>
+                        <div class="resultado_section_intern">
+                            <label class="google_label" for="inicial">Total Líquido</label>
+                            <div class="resultado_box">
+                                <p id="total_liquido">-</p>
+                            </div>
+                        </div>
+                </div>
             </div>
             <div id="notification" class="hidden">
                 <div class="notification-content">
@@ -136,9 +177,15 @@
             <a href="https://github.com/mwndl/Valorize" target="_blank">
                 <div class="github_icon" title="Visualizar repositório no GibHub"></div>
             </a>
-            <p>Developed by <span title="Abrir LinkedIn"><a href="https://www.linkedin.com/in/marcoswiendl/" target="_blank">Marcos Wiendl</a></span></p>
+            <div>
+                <p>Desenvolvido por <span title="Abrir LinkedIn"><a class='footer_link' href="https://www.linkedin.com/in/marcoswiendl/" target="_blank">Marcos Wiendl</a></span></p>
+                <p>Gostou? <span title="Abrir LinkedIn"><a class='footer_link' href="https://www.buymeacoffee.com/marcoswiendl" target="_blank">Compre-me um café!</a></span></p>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
+    <script>
+
+    </script>
 </body>
 </html>
