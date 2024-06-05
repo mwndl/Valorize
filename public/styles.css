@@ -81,8 +81,8 @@ h1, p {
 }
 
 .arrow_down {
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
     vertical-align: middle;
     background-image: url('/images/arrow_down_light.svg');
     background-size: contain;
@@ -155,7 +155,6 @@ h1, p {
 #simular_novamente {
     justify-content:space-between; 
     display: flex; 
-    padding: 20px 15px;
 }
 
 .simulator {
