@@ -542,7 +542,7 @@ h1, p {
     }
 
     .arrow_down {
-        background-image: url('/images/arrow_down_light.svg');
+        background-image: url('/images/arrow_down_dark.svg');
     }
     
 }
