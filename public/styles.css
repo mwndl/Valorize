@@ -182,6 +182,22 @@ h1, p {
     margin: 10px 0;
 }
 
+.resultado_dados {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 11px;
+    padding: 20px;
+}
+
+.result_dados_intern {
+    display: flex;
+    justify-content: space-between;
+    line-height: 0;
+    font-size: 14px;
+}
+
 
 .option {
     display: flex;

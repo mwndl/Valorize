@@ -150,13 +150,13 @@ async function getSelic() {
     }
 }
 
-function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidade, calcularImposto) {
+function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, calcularImposto) {
 
     valorInicial = valorInicial || 0;
     valorMensal = valorMensal || 0;
 
     // calcula a rentabilidade mensal com base na anual
-    var rentabFinal = rentabilidade / 100;
+    var rentabFinal = rentabilidadeInicial / 100;
     var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
 
     // calcuma o valor futuro dos depósitos mensais
@@ -208,6 +208,11 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     var impostoRendaDiv = document.getElementById('imposto_renda');
     var totalLiquidoDiv = document.getElementById('total_liquido');
 
+    var investimentoInicialP = document.getElementById('investimento_inicial_p');
+    var investimentoMensalP = document.getElementById('investimento_mensal_p');
+    var prazoP = document.getElementById('prazo_p');
+    var rentabilidadeP = document.getElementById('rentabilidade_p');
+
     valorBrutoDiv.textContent = converterReais(montanteFinal);
     totalInvestidoDiv.textContent = converterReais(totalInvestido);
     rendimentoJurosDiv.textContent = converterReais(rentabilidade - imposto);
@@ -219,6 +224,10 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     divSimularNovamente.style.display = 'flex';
     divResultados.style.display = 'block';
 
+    investimentoInicialP.textContent = converterReais(valorInicial);
+    investimentoMensalP.textContent = converterReais(valorMensal);
+    prazoP.textContent = `${prazoMeses} meses`;
+    rentabilidadeP.textContent = `${rentabilidadeInicial}% ao ano`;
 
 }
 
