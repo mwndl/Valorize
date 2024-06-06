@@ -126,6 +126,10 @@ function converterReais(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+function converterParaDuasCasas(valor) {
+    return valor.toFixed(2).replace('.', ',');
+}
+
 let selicValue; // Definindo a variável global
 
 async function getSelic() {
@@ -227,7 +231,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     investimentoInicialP.textContent = converterReais(valorInicial);
     investimentoMensalP.textContent = converterReais(valorMensal);
     prazoP.textContent = `${prazoMeses} meses`;
-    rentabilidadeP.textContent = `${rentabilidadeInicial}% ao ano`;
+    rentabilidadeP.textContent = `${converterParaDuasCasas(rentabilidadeInicial)}% ao ano`;
 
 }
 
