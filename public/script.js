@@ -2,19 +2,61 @@ document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
 });
 
+var brFlag = document.getElementById('brFlag')
+var usFlag = document.getElementById('usFlag')
+
+brFlag.addEventListener('click', function() {
+    changeLanguage('en');
+    brFlag.style.display = 'none'
+    usFlag.style.display = 'block'
+});
+
+usFlag.addEventListener('click', function() {
+    changeLanguage('pt');
+    brFlag.style.display = 'block'
+    usFlag.style.display = 'none'
+});
+
+let selectedLanguage = 'pt';
+
+function changeLanguage(language) {
+    // Atualiza o valor do idioma selecionado na variável global
+    selectedLanguage = language;
+
+    const elementsToTranslate = document.querySelectorAll('[id]');
+    // Feche o simulador para evitar elementos dinâmicos não traduzidos
+    simularNovamenteButton();
+
+    elementsToTranslate.forEach(element => {
+        const key = element.id;
+        if (translations[selectedLanguage][key]) {
+            if (element.querySelector('span')) {
+                // Tratamento especial para elementos com span
+                element.firstChild.textContent = translations[selectedLanguage][key];
+            } else {
+                // Para outros elementos
+                element.textContent = translations[selectedLanguage][key];
+            }
+        }
+    });
+}
+
+
 /* SISTEMA DE OCULTAR SIMULADORES */
 var divSimulator = document.querySelector('.simulator');
 var divSimularNovamente = document.querySelector('#simular_novamente');
 var divResultados = document.querySelector('#simulador_resultados')
 
-divSimularNovamente.addEventListener('click', function() {
+divSimularNovamente.addEventListener('click', simularNovamenteButton());
+
+function simularNovamenteButton() {
     divSimularNovamente.style.display = 'none'
     divResultados.style.display = 'none'
 
     if (divSimulator.style.display === 'none') {
         divSimulator.style.display = 'block';
     }
-});
+}
 
 /*  ************************ */
 
@@ -230,8 +272,8 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
 
     investimentoInicialP.textContent = converterReais(valorInicial);
     investimentoMensalP.textContent = converterReais(valorMensal);
-    prazoP.textContent = `${prazoMeses} meses`;
-    rentabilidadeP.textContent = `${converterParaDuasCasas(rentabilidadeInicial)}% ao ano`;
+    prazoP.textContent = `${prazoMeses} ${translations[selectedLanguage]['months']}`;
+    rentabilidadeP.textContent = `${converterParaDuasCasas(rentabilidadeInicial)}% ${translations[selectedLanguage]['perYear']}`;
 
 }
 
@@ -266,17 +308,17 @@ function handleSimulation() {
 
     // tratamento de erros
     if (!valorInicial && !valorMensal) {
-        notification("Informe algum valor para calcular")
+        notification(translations[selectedLanguage]['missingValueError'])
         return
     }
 
     if (!(tipoInvestimentoElement && tipoRentabilidadeElement)) {
-        notification("Selecione o tipo de investimento e rentabilidade")
+        notification(translations[selectedLanguage]['selectTypeAndProfitError'])
         return
     }
 
     if (!prazo) {
-        notification("Digite o prazo em anos, meses ou dias")
+        notification(translations[selectedLanguage]['missingTermError'])
         return
     }
 
@@ -300,7 +342,7 @@ function handleSimulation() {
         if (tipoRentabilidade === "pos_radio") {
 
             if (!rentabilidadePos) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
@@ -316,7 +358,7 @@ function handleSimulation() {
         } else if (tipoRentabilidade === "pre_radio") {
 
             if (!rentabilidadePre) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
@@ -326,11 +368,11 @@ function handleSimulation() {
         } else if (tipoRentabilidade === "ipca_radio") {
 
             if (!rentabilidadeIpca) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
-            notification("Essa opção ainda está sendo desenvolvida")
+            notification(translations[selectedLanguage]['unavailableOptionError'])
 
         }
 
@@ -341,7 +383,7 @@ function handleSimulation() {
         if (tipoRentabilidade === "pos_radio") {
 
             if (!rentabilidadePos) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
@@ -356,7 +398,7 @@ function handleSimulation() {
         } else if (tipoRentabilidade === "pre_radio") {
 
             if (!rentabilidadePre) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
@@ -365,11 +407,11 @@ function handleSimulation() {
         } else if (tipoRentabilidade === "ipca_radio") {
 
             if (!rentabilidadeIpca) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
-            notification("Essa opção ainda está sendo desenvolvida")
+            notification(translations[selectedLanguage]['unavailableOptionError'])
 
         }
 
@@ -379,7 +421,7 @@ function handleSimulation() {
         if (tipoRentabilidade === "pos_radio") {
 
             if (!rentabilidadePos) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
@@ -393,7 +435,7 @@ function handleSimulation() {
         } else if (tipoRentabilidade === "pre_radio") {
 
             if (!rentabilidadePre) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
@@ -402,15 +444,15 @@ function handleSimulation() {
         } else if (tipoRentabilidade === "ipca_radio") {
 
             if (!rentabilidadeIpca) {
-                notification("Defina a rentabilidade do investimento")
+                notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
-            notification("Essa opção ainda está sendo desenvolvida")
+            notification(translations[selectedLanguage]['unavailableOptionError'])
 
         }
 
     } else if (tipoInvestimento === "poupanca_radio") {
-        notification("Essa opção ainda está sendo desenvolvida")
+        notification(translations[selectedLanguage]['unavailableOptionError'])
     }
 }
 

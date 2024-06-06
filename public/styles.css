@@ -8,6 +8,11 @@ body {
     flex-direction: column;
 }
 
+.flag {
+    width: 40px;
+    cursor: pointer;
+}
+
 h1, p {
     color: #252525;
 }
@@ -19,7 +24,11 @@ h1, p {
 }
 
 .top {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
     text-align: center;
+    padding: 10px;
 }
 
 .main {

@@ -15,18 +15,19 @@
 <body>
     <div class="container">
         <div class="top">
-            <!-- Conteúdo do topo -->
+            <img id="brFlag" style="width: 40px; height: 40px;" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f1e7-1f1f7.svg" alt="BR Flag">
+            <img id="usFlag" style="width: 40px; height: 40px;display: none;" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f1fa-1f1f8.svg" alt="US Flag">
         </div>
         <div class="main">
             <div class="message">
-                <h1>Simulador de Renda Fixa</h1>
-                <p>Utilize nossa calculadora de renda fixa abaixo</p>
+                <h1 id="mainTitle">Simulador de Renda Fixa</h1>
+                <p id="mainDescription">Utilize nossa calculadora de renda fixa abaixo</p>
             </div>
             <div class="simulator" id="simulator">
                 <div class="simulator_top">
                     <div class="simulator_section">
                         <div class="simulator_section_intern">
-                            <label class="google_label" for="inicial">Investimento Inicial</label>
+                            <label class="google_label" for="inicial" id="initialInvestmentLabel">Investimento Inicial</label>
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">R$</div>
                                 <input id="valor_inicial" type="text" class="google_input" name="initial_investment"
@@ -34,10 +35,10 @@
                             </div>
                         </div>
                         <div class="simulator_section_intern">
-                            <label class="google_label" for="inicial">Aporte Mensal</label>
+                            <label class="google_label" for="mensal" id="monthlyInvestmentLabel">Aporte Mensal</label>
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">R$</div>
-                                <input id="valor_mensal" type="text" class="google_input" name="initial_investment"
+                                <input id="valor_mensal" type="text" class="google_input" name="monthly_contribution"
                                     placeholder="0,00" autocomplete="off">
                             </div>
                         </div>
@@ -45,57 +46,57 @@
                 </div>
                 <div class="simulator_section">
                     <div class="simulator_section_intern">
-                        <p style="text-align: start; font-size: 22px;">Qual o tipo de investimento?</p>
+                        <p style="text-align: start; font-size: 22px;" id="investmentTypeLabel">Qual o tipo de investimento?</p>
                         <div class="option">
                             <input type="radio" id="cdb_radio" name="investimento_tipo" value="cdb_radio">
-                            <label for="cdb_radio">CDB, LC ou Títulos Públicos</label>
+                            <label for="cdb_radio" id="cbdRadioLabel">CDB, LC ou Títulos Públicos</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="lci_radio" name="investimento_tipo" value="lci_radio">
-                            <label for="lci_radio">LCI / LCA</label>
+                            <label for="lci_radio" id="lciRadioLabel">LCI / LCA</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="tesouro_radio" name="investimento_tipo" value="tesouro_radio">
-                            <label for="tesouro_radio">Tesouro Selic</label>
+                            <label for="tesouro_radio" id="tesouroRadioLabel">Tesouro Selic</label>
                         </div>
                         <div class="option" style="display:none">
                             <input type="radio" id="poupanca_radio" name="investimento_tipo" value="poupanca_radio">
-                            <label for="poupanca_radio">Poupança</label>
+                            <label for="poupanca_radio" id="poupancaRadioLabel">Poupança</label>
                         </div>
                     </div>
                     <div class="simulator_section_intern">
-                        <p style="text-align: start; font-size: 22px;">Tipo de rentabilidade</p>
+                        <p style="text-align: start; font-size: 22px;" id="rentTypeLabel">Tipo de rentabilidade</p>
                         <div class="option">
                             <input type="radio" id="pos_radio" name="rentabilidade_tipo" value="pos_radio">
-                            <label for="pos_radio">Pós-fixado</label>
+                            <label for="pos_radio" id="posRadioLabel">Pós-fixado</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="pre_radio" name="rentabilidade_tipo" value="pre_radio">
-                            <label for="pre_radio">Pré-fixado</label>
+                            <label for="pre_radio" id="preRadioLabel">Pré-fixado</label>
                         </div>
                         <div class="option" style="display:none">
                             <input type="radio" id="ipca_radio" name="rentabilidade_tipo" value="ipca_radio">
-                            <label for="ipca_radio">IPCA</label>
+                            <label for="ipca_radio" id="ipcaRadioLabel">IPCA</label>
                         </div>
                     </div>
                 </div>
                 <div class="simulator_main">
                     <div class="simulator_section">
                         <div class="simulator_section_intern">
-                            <label class="google_label" for="inicial">Prazo</label>
+                            <label class="google_label" for="inicial" id="deadlineLabel">Prazo</label>
                             <div class="google_input_wrapper">
                                 <input id="prazo" type="text" class="google_input" name="initial_investment"
                                     placeholder="0" autocomplete="off">
                                 <select id="time_period" name="time_period">
-                                    <option value="2">Anos</option>
-                                    <option value="1">Meses</option>
-                                    <option value="0">Dias</option>
+                                    <option value="2" id="yearsLabel">Anos</option>
+                                    <option value="1" id="monthsLabel">Meses</option>
+                                    <option value="0" id="daysLabel">Dias</option>
                                     
                                 </select>
                             </div>
                         </div>
                         <div class="simulator_section_intern" id="rent_pos" style="display:none">
-                            <label class="google_label" for="inicial">% do CDI</label>
+                            <label class="google_label" for="inicial" id="porcCdiLabel">% do CDI</label>
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_pos" type="text" class="google_input" name="initial_investment"
@@ -103,7 +104,7 @@
                             </div>
                         </div>
                         <div class="simulator_section_intern" id="rent_pre" style="display:none">
-                            <label class="google_label" for="inicial">Rentabilidade Anual</label>
+                            <label class="google_label" for="inicial" id="rentAnualLabel">Rentabilidade Anual</label>
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_pre" type="text" class="google_input" name="initial_investment"
@@ -111,7 +112,7 @@
                             </div>
                         </div>
                         <div class="simulator_section_intern" id="rent_ipca" style="display:none">
-                            <label class="google_label" for="inicial">IPCA + X%</label>
+                            <label class="google_label" for="inicial" id="ipcaPlusLabel">IPCA + X%</label>
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_ipca" type="text" class="google_input" name="initial_investment"
@@ -127,62 +128,62 @@
                 </div>
             </div>
             <div class="simulator" id="simular_novamente" style="display: none; font-size: 18px; align-items: center;">
-                <span style="padding: 20px 10px;">Simular novamente</span>
+                <span style="padding: 20px 10px;" id="simularNovamenteLabel">Simular novamente</span>
                 <div class="arrow_down"></div>
               </div>
             <div class="simulator" id="simulador_resultados" style="margin-top: 20px; display:none">
                 <div class="resultado_dados">
                     <div class="result_dados_intern">
-                        <p>Investimento Inicial:</p>
+                        <p id="initialInvestmentResultLabel">Investimento Inicial:</p>
                         <p id="investimento_inicial_p">-</p>
                     </div>
                     <div class="result_dados_intern">
-                        <p>Investimento Mensal:</p>
+                        <p id="monthlyInvestmentResultLabel">Investimento Mensal:</p>
                         <p id="investimento_mensal_p">-</p>
                     </div>
                     <div class="result_dados_intern">
-                        <p>Prazo:</p>
+                        <p id="deadlineResultLabel">Prazo:</p>
                         <p id="prazo_p">-</p>
                     </div>
                     <div class="result_dados_intern">
-                        <p>Rentabilidade:</p>
+                        <p id="rentResultLabel">Rentabilidade:</p>
                         <p id="rentabilidade_p">-</p>
                     </div>
                 </div>
                 <hr style="border-top: 1px solid rgb(100, 100, 100); border-right: none; border-bottom: none; border-left: none; border-image: initial; margin: 9px 0;">
                 <div class="resultado_container">
                         <div class="resultado_section_intern">
-                            <label class="google_label" for="inicial">Valor Bruto</label>
+                            <label class="google_label" for="inicial" id="valorBrutoResultLabel">Valor Bruto</label>
                             <div class="resultado_box">
                                 <p id="valor_bruto">-</p>
                             </div>
                         </div>
                         <div class="resultado_section_intern">
-                            <label class="google_label" for="inicial">Total Investido</label>
+                            <label class="google_label" for="inicial" id="totalInvestidoResultLabel">Total Investido</label>
                             <div class="resultado_box">
                                 <p id="total_investido">-</p>
                             </div>
                         </div>
                         <div class="resultado_section_intern">
-                            <label class="google_label" for="inicial">Rendimento em Juros</label>
+                            <label class="google_label" for="inicial" id="rendimentoEmJurosResultLabel">Rendimento em Juros</label>
                             <div class="resultado_box">
                                 <p id="rendimento_juros">-</p>
                             </div>
                         </div>
                         <div class="resultado_section_intern">
-                            <label class="google_label" for="inicial">Alíquota IR</label>
+                            <label class="google_label" for="inicial" id="aliquootaIrResultLabel">Alíquota IR</label>
                             <div class="resultado_box">
                                 <p id="aliquota_ir">-</p>
                             </div>
                         </div>
                         <div class="resultado_section_intern">
-                            <label class="google_label" for="inicial">Imposto de Renda</label>
+                            <label class="google_label" for="inicial" id="impostoDeRendaResultLabel">Imposto de Renda</label>
                             <div class="resultado_box">
                                 <p id="imposto_renda">-</p>
                             </div>
                         </div>
                         <div class="resultado_section_intern">
-                            <label class="google_label" for="inicial">Total Líquido</label>
+                            <label class="google_label" for="inicial" id="totalLiquidoResultLabel">Total Líquido</label>
                             <div class="resultado_box">
                                 <p id="total_liquido">-</p>
                             </div>
@@ -200,11 +201,20 @@
                 <div class="github_icon" title="Visualizar repositório no GibHub"></div>
             </a>
             <div>
-                <p>Desenvolvido por <span title="Abrir LinkedIn"><a class='footer_link' href="https://www.linkedin.com/in/marcoswiendl/" target="_blank">Marcos Wiendl</a></span></p>
-                <p>Gostou? <span title="Abrir LinkedIn"><a class='footer_link' href="https://www.buymeacoffee.com/marcoswiendl" target="_blank">Compre-me um café! ☕️</a></span></p>
+                <p id="developedByLabel" >Desenvolvido por 
+                    <span title="Abrir LinkedIn">
+                        <a class='footer_link' href="https://www.linkedin.com/in/marcoswiendl/" target="_blank" id="developerNameLabel">Marcos Wiendl</a>
+                    </span>
+                </p>
+                <p id="bmac1Label">Gostou? 
+                    <span title="Abrir LinkedIn">
+                        <a class='footer_link' href="https://www.buymeacoffee.com/marcoswiendl" target="_blank" id="bmac2Label">Compre-me um café! ☕️</a>
+                    </span>
+                </p>
             </div>
         </div>
     </div>
+    <script src="translations.js"></script>
     <script src="script.js"></script>
     <script>
 
