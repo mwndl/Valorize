@@ -57,6 +57,14 @@ const translations = {
         "missingTermError": "Digite o prazo em anos, meses ou dias",
         "missingProfitError": "Defina a rentabilidade do investimento",
         "unavailableOptionError": "Essa opção não está disponível",
+
+        // titles
+        "flagDivTitle": "Toque para alterar o idioma",
+        "simularButtonTitle": "Toque para fazer uma simulação",
+        "developerNameTitle": "Abrir LinkedIn",
+        "bmac2LabelTitle": "Abrir Buy Me a Coffee",
+        "githubIconTitle": "Abrir repositório GitHub",
+
     },
 
     "en": {
@@ -116,5 +124,12 @@ const translations = {
         "missingTermError": "Enter the term in years, months or days",
         "missingProfitError": "Define the yield of the investment",
         "unavailableOptionError": "This option is not available",
+
+        // titles
+        "flagDivTitle": "Tap to change the language",
+        "simularButtonTitle": "Tap to simulate",
+        "developerNameTitle": "Open LinkedIn",
+        "bmac2LabelTitle": "Open Buy Me a Coffee",
+        "githubIconTitle": "Open GitHub repository",
     }
 };

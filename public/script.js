@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
+    setElementTitles(selectedLanguage)
 });
 
 var brFlag = document.getElementById('brFlag')
@@ -26,6 +27,7 @@ function changeLanguage(language) {
     const elementsToTranslate = document.querySelectorAll('[id]');
     // Feche o simulador para evitar elementos dinâmicos não traduzidos
     simularNovamenteButton();
+    setElementTitles(language)
 
     elementsToTranslate.forEach(element => {
         const key = element.id;
@@ -39,6 +41,15 @@ function changeLanguage(language) {
             }
         }
     });
+}
+
+function setElementTitles(selectedLanguage) {
+    document.getElementById('flagDiv').title = translations[selectedLanguage]['flagDivTitle'];
+    document.getElementById('simularButton').title = translations[selectedLanguage]['simularButtonTitle'];
+    document.getElementById('developerNameLabel').title = translations[selectedLanguage]['developerNameTitle'];
+    document.getElementById('bmac2Label').title = translations[selectedLanguage]['bmac2LabelTitle'];
+    document.getElementById('github_icon').title = translations[selectedLanguage]['githubIconTitle'];
+
 }
 
 
