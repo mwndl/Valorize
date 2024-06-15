@@ -325,6 +325,11 @@ function showRendType() {
     document.getElementById('rent_pre').style.display = 'none';
     document.getElementById('rent_ipca').style.display = 'none';
     document.getElementById('rent_poupanca').style.display = 'none';
+
+    const rentabilidadeRadios = document.querySelectorAll('input[name="rentabilidade_tipo"]');
+    rentabilidadeRadios.forEach(radio => {
+        radio.checked = false;
+    });
 }
 
 // Seleciona todos os inputs de radio
