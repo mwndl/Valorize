@@ -62,12 +62,13 @@
                             <input type="radio" id="tesouro_radio" name="investimento_tipo" value="tesouro_radio">
                             <label for="tesouro_radio" id="tesouroRadioLabel">Tesouro Selic</label>
                         </div>
-                        <div class="option" style="display:none">
+                        <div class="option">
                             <input type="radio" id="poupanca_radio" name="investimento_tipo" value="poupanca_radio">
                             <label for="poupanca_radio" id="poupancaRadioLabel">Poupança</label>
                         </div>
                     </div>
                     <div class="simulator_section_intern">
+                        <div class="unavailable_overlay" id="unavailable_overlay" style="z-index: 1; display:none;"></div>
                         <p style="text-align: start; font-size: 22px;" id="rentTypeLabel">Tipo de rentabilidade</p>
                         <div class="option">
                             <input type="radio" id="pos_radio" name="rentabilidade_tipo" value="pos_radio">
@@ -120,6 +121,16 @@
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_ipca" type="text" class="google_input" name="initial_investment"
                                     placeholder="0,00" autocomplete="off">
+                            </div>
+                        </div>
+
+
+                        <div class="simulator_section_intern" id="rent_poupanca" style="display:none">
+                            <label class="google_label" for="inicial" id="ipcaPlusLabel">Rentabilidade Poupança</label>
+                            <div class="google_input_wrapper">
+                                <div class="google_prefix">%</div>
+                                <input id="rent_input_poupanca" type="text" class="google_input" name="initial_investment"
+                                    placeholder="0,00" autocomplete="off" readonly>
                             </div>
                         </div>
                     </div>

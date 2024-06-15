@@ -53,7 +53,7 @@ const translations = {
 
         // tratamento de erros
         "missingValueError": "Informe algum valor para calcular",
-        "typeAndProfitabilityNotSpecified": "Selecione o tipo de investimento e rentabilidade",
+        "selectTypeAndProfitError": "Selecione o tipo de investimento e rentabilidade",
         "missingTermError": "Digite o prazo em anos, meses ou dias",
         "missingProfitError": "Defina a rentabilidade do investimento",
         "unavailableOptionError": "Essa opção não está disponível",

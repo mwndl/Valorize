@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
+    getTRMediaMensal();
     setElementTitles(selectedLanguage)
 });
 
@@ -135,6 +136,14 @@ function formatarValor(valor) {
     return valor;
 }
 
+// Função para formatar a data no formato dd/mm/yyyy
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 // Exibir e ocultar inputs de rentabilidade com base no tipo
 var radios = document.getElementsByName('rentabilidade_tipo');
 radios.forEach(function (radio) {
@@ -154,21 +163,25 @@ function showRentInputs() {
                     document.getElementById('rent_pos').style.display = 'flex';
                     document.getElementById('rent_pre').style.display = 'none';
                     document.getElementById('rent_ipca').style.display = 'none';
+                    document.getElementById('rent_poupanca').style.display = 'none';
                     break;
                 case 'pre_radio':
                     document.getElementById('rent_pre').style.display = 'flex';
                     document.getElementById('rent_pos').style.display = 'none';
                     document.getElementById('rent_ipca').style.display = 'none';
+                    document.getElementById('rent_poupanca').style.display = 'none';
                     break;
                 case 'ipca_radio':
                     document.getElementById('rent_ipca').style.display = 'flex';
                     document.getElementById('rent_pos').style.display = 'none';
                     document.getElementById('rent_pre').style.display = 'none';
+                    document.getElementById('rent_poupanca').style.display = 'none';
                     break;
                 default:
                     document.getElementById('rent_pos').style.display = 'block';
                     document.getElementById('rent_pre').style.display = 'none';
                     document.getElementById('rent_ipca').style.display = 'none';
+                    document.getElementById('rent_poupanca').style.display = 'none';
             }
         }
     }
@@ -184,6 +197,8 @@ function converterParaDuasCasas(valor) {
 }
 
 let selicValue; // Definindo a variável global
+let trValue;
+let rentPoupanca;
 
 async function getSelic() {
     try {
@@ -206,6 +221,124 @@ async function getSelic() {
         throw error;
     }
 }
+
+async function getTRMediaMensal() {
+    try {
+        // Data de hoje
+        const dataFinal = new Date();
+
+        // Data inicial (30 dias atrás)
+        const dataInicial = new Date();
+        dataInicial.setDate(dataInicial.getDate() - 30);
+
+        // Formata as datas
+        const dataInicialFormatada = formatDate(dataInicial);
+        const dataFinalFormatada = formatDate(dataFinal);
+
+        // URL da API com as datas formatadas
+        const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.226/dados?formato=json&dataInicial=${dataInicialFormatada}&dataFinal=${dataFinalFormatada}`;
+
+        // Faz a solicitação usando a API Fetch
+        const response = await fetch(url);
+
+        // Verifica se a resposta da API foi bem-sucedida
+        if (!response.ok) {
+            throw new Error('Erro ao obter os dados. Status: ' + response.status);
+        }
+
+        // Obtém os dados da resposta
+        const data = await response.json();
+
+        // Calcula a média dos valores de TR
+        const valores = data.map(item => parseFloat(item.valor));
+        const soma = valores.reduce((acc, valor) => acc + valor, 0);
+        const mediaTR = soma / valores.length;
+
+        // Atualiza a variável trValue
+        trValue = mediaTR;
+
+        // Retorna a média
+        return mediaTR;
+    } catch (error) {
+        // Lança o erro para ser tratado pelo chamador da função
+        throw error;
+    }
+}
+
+function getPoupancaRent() {
+
+    if (selicValue < 8.5) {
+        console.log('selic abaixo de 8.5%')
+        rentPoupanca = selicValue * 0.7;
+    } else {
+        console.log('selic acima de 8.5%')
+        let monthlyRate = 0.005; // 0.5% em decimal
+        rentPoupanca = (Math.pow(1 + monthlyRate, 12) - 1) * 100; // Calcula a rentabilidade anual
+    }
+    return rentPoupanca;
+}
+
+// Função que será acionada quando o estado de um radio button mudar
+function handleRadioChange(event) {
+    const selectedValue = event.target.value;
+
+    // Realiza ações específicas com base no valor selecionado
+    switch (selectedValue) {
+        case 'cdb_radio':
+            console.log("Selecionado: CDB, LC ou Títulos Públicos");
+            showRendType()
+            break;
+        case 'lci_radio':
+            console.log("Selecionado: LCI / LCA");
+            showRendType()
+            break;
+        case 'tesouro_radio':
+            console.log("Selecionado: Tesouro Selic");
+            showRendType()
+            break;
+        case 'poupanca_radio':
+            console.log("Selecionado: Poupança");
+            hideRentType()
+            let rentPoupanca = getPoupancaRent();
+
+            document.getElementById('rent_pos').style.display = 'none';
+            document.getElementById('rent_pre').style.display = 'none';
+            document.getElementById('rent_ipca').style.display = 'none';
+            document.getElementById('rent_poupanca').style.display = 'flex';
+            document.getElementById('rent_input_poupanca').value = rentPoupanca.toFixed(2)
+            
+            break;
+        default:
+            console.log("Nenhuma opção válida selecionada");
+            break;
+    }
+}
+
+function hideRentType() {
+    document.getElementById('unavailable_overlay').style.display = 'block';
+    const rentabilidadeRadios = document.querySelectorAll('input[name="rentabilidade_tipo"]');
+    rentabilidadeRadios.forEach(radio => {
+        radio.checked = false;
+    });
+}
+
+function showRendType() {
+    document.getElementById('unavailable_overlay').style.display = 'none';
+
+    document.getElementById('rent_pos').style.display = 'none';
+    document.getElementById('rent_pre').style.display = 'none';
+    document.getElementById('rent_ipca').style.display = 'none';
+    document.getElementById('rent_poupanca').style.display = 'none';
+}
+
+// Seleciona todos os inputs de radio
+const radioButtons = document.querySelectorAll('input[name="investimento_tipo"]');
+
+// Adiciona um event listener para cada radio button
+radioButtons.forEach(radio => {
+    radio.addEventListener('change', handleRadioChange);
+});
+
 
 function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, calcularImposto) {
 
@@ -323,9 +456,13 @@ function handleSimulation() {
         return
     }
 
-    if (!(tipoInvestimentoElement && tipoRentabilidadeElement)) {
-        notification(translations[selectedLanguage]['selectTypeAndProfitError'])
-        return
+    if (tipoInvestimento !== "poupanca_radio") {
+
+        if (!(tipoInvestimentoElement && tipoRentabilidadeElement)) {
+            notification(translations[selectedLanguage]['selectTypeAndProfitError'])
+            return
+        }
+
     }
 
     if (!prazo) {
@@ -463,7 +600,9 @@ function handleSimulation() {
         }
 
     } else if (tipoInvestimento === "poupanca_radio") {
-        notification(translations[selectedLanguage]['unavailableOptionError'])
+
+        rentabilidade = getPoupancaRent()
+        calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade)
     }
 }
 

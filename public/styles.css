@@ -112,7 +112,7 @@ h1, p {
 /* ESTILOS INTERNOS */
 
 .message {
-    margin: 0 0 60px 0;
+    margin: 0 0 30px 0;
 }
 
 #notification {
@@ -143,6 +143,15 @@ h1, p {
     width: 100%;
 }
 
+.unavailable_overlay {
+    position: absolute; /* Definindo a posição absoluta */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #28282899; /* Opacidade */
+    z-index: 1;
+}
 
 /* SIMULADOR */
 
