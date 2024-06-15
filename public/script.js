@@ -341,7 +341,7 @@ radioButtons.forEach(radio => {
 });
 
 
-function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, calcularImposto) {
+function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, descricao, calcularImposto) {
 
     valorInicial = valorInicial || 0;
     valorMensal = valorMensal || 0;
@@ -403,6 +403,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     var investimentoMensalP = document.getElementById('investimento_mensal_p');
     var prazoP = document.getElementById('prazo_p');
     var rentabilidadeP = document.getElementById('rentabilidade_p');
+    var tipoInvestimentoP = document.getElementById('tipo_de_investimento_p');
 
     valorBrutoDiv.textContent = converterReais(montanteFinal);
     totalInvestidoDiv.textContent = converterReais(totalInvestido);
@@ -419,6 +420,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     investimentoMensalP.textContent = converterReais(valorMensal);
     prazoP.textContent = `${prazoMeses} ${translations[selectedLanguage]['months']}`;
     rentabilidadeP.textContent = `${converterParaDuasCasas(rentabilidadeInicial)}% ${translations[selectedLanguage]['perYear']}`;
+    tipoInvestimentoP.textContent = descricao;
 
 }
 
@@ -486,6 +488,7 @@ function handleSimulation() {
 
     /* CDBs */
     if (tipoInvestimento === "cdb_radio") {
+        var descricao = 'CDB, LC ou Títulos Públicos'
 
         /* CDB PÓS-FIXADO */
         if (tipoRentabilidade === "pos_radio") {
@@ -499,7 +502,7 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, true)
 
 
 
@@ -511,7 +514,7 @@ function handleSimulation() {
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, true)
 
             /* CDB IPCA */
         } else if (tipoRentabilidade === "ipca_radio") {
@@ -528,6 +531,8 @@ function handleSimulation() {
         /* LCIs */
     } else if (tipoInvestimento === "lci_radio") {
 
+        var descricao = 'LCI / LCA'
+
         /* LCI PÓS-FIXADO */
         if (tipoRentabilidade === "pos_radio") {
 
@@ -540,7 +545,7 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao)
 
 
             // rentabilidade pós-fixada
@@ -551,7 +556,7 @@ function handleSimulation() {
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao)
 
         } else if (tipoRentabilidade === "ipca_radio") {
 
@@ -566,6 +571,8 @@ function handleSimulation() {
 
     } else if (tipoInvestimento === "tesouro_radio") {
 
+        var descricao = 'Tesouro Direto'
+
         // rentabilidade pós-fixada
         if (tipoRentabilidade === "pos_radio") {
 
@@ -578,7 +585,7 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, 'true')
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, 'true')
 
             // rentabilidade pós-fixada
         } else if (tipoRentabilidade === "pre_radio") {
@@ -588,7 +595,7 @@ function handleSimulation() {
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, 'true')
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, 'true')
 
         } else if (tipoRentabilidade === "ipca_radio") {
 
@@ -602,8 +609,10 @@ function handleSimulation() {
 
     } else if (tipoInvestimento === "poupanca_radio") {
 
+        var descricao = 'Poupança'
+
         rentabilidade = getPoupancaRent()
-        calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade)
+        calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao)
     }
 }
 

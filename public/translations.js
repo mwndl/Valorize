@@ -35,6 +35,7 @@ const translations = {
         "monthlyInvestmentResultLabel": "Investimento Mensal:",
         "deadlineResultLabel": "Prazo:",
         "rentResultLabel": "Rentabilidade:",
+        "investTypeLabel": "Tipo de Investimento:",
 
         "valorBrutoResultLabel": "Valor Bruto",
         "totalInvestidoResultLabel": "Total Investido",
@@ -103,6 +104,7 @@ const translations = {
         "monthlyInvestmentResultLabel": "Monthly Investment:",
         "deadlineResultLabel": "Term:",
         "rentResultLabel": "Yield:",
+        "investTypeLabel": "Investment Type:",
 
         "valorBrutoResultLabel": "Gross Amount",
         "totalInvestidoResultLabel": "Total Invested",
