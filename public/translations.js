@@ -25,6 +25,7 @@ const translations = {
         "porcCdiLabel": "% do CDI",
         "rentAnualLabel": "Rentabilidade Anual",
         "ipcaPlusLabel": "IPCA + X%",
+        "poupancaLabel": "Rentabilidade Anual",
 
         "simularButton": "Simular",
 
@@ -92,6 +93,7 @@ const translations = {
         "porcCdiLabel": "% of CDI",
         "rentAnualLabel": "Annual Yield",
         "ipcaPlusLabel": "IPCA + X%",
+        "poupancaLabel": "Annual Yield",
 
         "simularButton": "Simulate",
 

@@ -285,19 +285,15 @@ function handleRadioChange(event) {
     // Realiza ações específicas com base no valor selecionado
     switch (selectedValue) {
         case 'cdb_radio':
-            console.log("Selecionado: CDB, LC ou Títulos Públicos");
             showRendType()
             break;
         case 'lci_radio':
-            console.log("Selecionado: LCI / LCA");
             showRendType()
             break;
         case 'tesouro_radio':
-            console.log("Selecionado: Tesouro Selic");
             showRendType()
             break;
         case 'poupanca_radio':
-            console.log("Selecionado: Poupança");
             hideRentType()
             let rentPoupanca = getPoupancaRent();
 
