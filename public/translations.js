@@ -52,6 +52,7 @@ const translations = {
         "bmac2Label": "Compre-me um café! ☕️",
 
         // conteúdo dinámico
+        "days": "dias",
         "months": "meses",
         "perYear": "ao ano",
 
@@ -123,6 +124,7 @@ const translations = {
         "bmac2Label": "Buy me a coffee! ☕️",
 
         // conteúdo dinámico
+        "days": "days",
         "months": "months",
         "perYear": "per year",
 

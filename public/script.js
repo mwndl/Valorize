@@ -424,7 +424,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
 
     investimentoInicialP.textContent = converterReais(valorInicial);
     investimentoMensalP.textContent = converterReais(valorMensal);
-    prazoP.textContent = `${prazoMeses} ${translations[selectedLanguage]['months']}`;
+    prazoP.textContent = `${prazoDias} ${translations[selectedLanguage]['days']}`;
     rentabilidadeP.textContent = `${converterParaDuasCasas(rentabilidadeInicial)}% ${translations[selectedLanguage]['perYear']}`;
     tipoInvestimentoP.textContent = descricao;
 
