@@ -413,7 +413,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
 
     valorBrutoDiv.textContent = converterReais(montanteFinal);
     totalInvestidoDiv.textContent = converterReais(totalInvestido);
-    rendimentoJurosDiv.textContent = converterReais(rentabilidade - imposto);
+    rendimentoJurosDiv.textContent = converterReais(rentabilidade);
     aliquotaDiv.textContent = `${aliquotaImposto} %`;
     impostoRendaDiv.textContent = converterReais(imposto);
     totalLiquidoDiv.textContent = converterReais(montanteFinal - imposto);
