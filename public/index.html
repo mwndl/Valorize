@@ -34,7 +34,7 @@
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">R$</div>
                                 <input id="valor_inicial" type="text" class="google_input" name="initial_investment"
-                                    placeholder="0,00" autocomplete="off">
+                                    placeholder="0,00" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                             </div>
                         </div>
                         <div class="simulator_section_intern">
@@ -42,7 +42,7 @@
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">R$</div>
                                 <input id="valor_mensal" type="text" class="google_input" name="monthly_contribution"
-                                    placeholder="0,00" autocomplete="off">
+                                    placeholder="0,00" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <label class="google_label" for="inicial" id="deadlineLabel">Prazo</label>
                             <div class="google_input_wrapper">
                                 <input id="prazo" type="text" class="google_input" name="initial_investment"
-                                    placeholder="0" autocomplete="off">
+                                    placeholder="0" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                                 <select id="time_period" name="time_period">
                                     <option value="2" id="yearsLabel">Anos</option>
                                     <option value="1" id="monthsLabel">Meses</option>
@@ -104,7 +104,7 @@
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_pos" type="text" class="google_input" name="initial_investment"
-                                    placeholder="0,00" autocomplete="off">
+                                    placeholder="0,00" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                             </div>
                         </div>
                         <div class="simulator_section_intern" id="rent_pre" style="display:none">
@@ -112,7 +112,7 @@
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_pre" type="text" class="google_input" name="initial_investment"
-                                    placeholder="0,00" autocomplete="off">
+                                    placeholder="0,00" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                             </div>
                         </div>
                         <div class="simulator_section_intern" id="rent_ipca" style="display:none">
@@ -120,7 +120,7 @@
                             <div class="google_input_wrapper">
                                 <div class="google_prefix">%</div>
                                 <input id="rent_input_ipca" type="text" class="google_input" name="initial_investment"
-                                    placeholder="0,00" autocomplete="off">
+                                    placeholder="0,00" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                             </div>
                         </div>
                         <div class="simulator_section_intern" id="rent_poupanca" style="display:none">
