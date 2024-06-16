@@ -1,6 +1,8 @@
 // translations.js
 const translations = {
     "pt": {
+        "pageTitle": "Valorize | Simulador Renda Fixa",
+
         "mainTitle": "Simulador de Renda Fixa",
         "mainDescription": "Utilize nossa calculadora de renda fixa abaixo",
         "initialInvestmentLabel": "Investimento Inicial",
@@ -32,7 +34,7 @@ const translations = {
         "simularNovamenteLabel": "Simular novamente",
 
         "initialInvestmentResultLabel": "Investimento Inicial:",
-        "monthlyInvestmentResultLabel": "Investimento Mensal:",
+        "monthlyInvestmentResultLabel": "Aporte Mensal:",
         "deadlineResultLabel": "Prazo:",
         "rentResultLabel": "Rentabilidade:",
         "investTypeLabel": "Tipo de Investimento:",
@@ -70,6 +72,8 @@ const translations = {
     },
 
     "en": {
+        "pageTitle": "Valorize | Fixed Income Simulator",
+
         "mainTitle": "Fixed Income Simulator",
         "mainDescription": "Use our fixed income calculator below",
         "initialInvestmentLabel": "Initial Investment",

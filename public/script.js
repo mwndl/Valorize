@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
     getTRMediaMensal();
-    setElementTitles(selectedLanguage)
+    changeLanguage('pt');
 });
 
 var brFlag = document.getElementById('brFlag')
@@ -274,10 +274,10 @@ async function getTRMediaMensal() {
 function getPoupancaRent() {
 
     if (selicValue < 8.5) {
-        console.log('selic abaixo de 8.5%')
+        // Selic abaixo de 8.5%
         rentPoupanca = selicValue * 0.7;
     } else {
-        console.log('selic acima de 8.5%')
+        // Selic acima de 8.5%
         let monthlyRate = 0.005; // 0.5% em decimal
         rentPoupanca = (Math.pow(1 + monthlyRate, 12) - 1) * 100; // Calcula a rentabilidade anual
     }
@@ -349,17 +349,12 @@ radioButtons.forEach(radio => {
 
 function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, descricao, calcularImposto) {
 
-    console.log('1 - RENT: ', rentabilidadeInicial)
-
     valorInicial = valorInicial || 0;
     valorMensal = valorMensal || 0;
 
     // calcula a rentabilidade mensal com base na anual
     var rentabFinal = rentabilidadeInicial / 100;
     var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
-
-    console.log('2 - RENT: ', rentabFinal)
-    console.log('3 - RENT: ', rentabilidadeMensal)
 
     // calcuma o valor futuro dos depósitos mensais
     var montanteFinal = 0;
@@ -531,8 +526,6 @@ function handleSimulation() {
                 notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
-
-            console.log('0 - RENT: ', rentabilidadePre)
 
             calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, true)
 
