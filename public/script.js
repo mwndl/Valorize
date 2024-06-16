@@ -92,12 +92,14 @@ function notification(customMessage) {
 // Formatar valores monetários (inputs valor inicial e mensal)
 var valorInicialInput = document.getElementById('valor_inicial');
 var valorMensalInput = document.getElementById('valor_mensal');
+var rentPreInput = document.getElementById('rent_input_pre');
 
 formatarValorInicial();
 formatarValorMensal();
 
 valorInicialInput.addEventListener('input', formatarValorInicial);
 valorMensalInput.addEventListener('input', formatarValorMensal);
+rentPreInput.addEventListener('input', formatarRentPre);
 
 function formatarValorInicial() {
     valorInicialInput.value = formatarValor(valorInicialInput.value);
@@ -105,6 +107,10 @@ function formatarValorInicial() {
 
 function formatarValorMensal() {
     valorMensalInput.value = formatarValor(valorMensalInput.value);
+}
+
+function formatarRentPre() {
+    rentPreInput.value = replaceCommas(rentPreInput.value)
 }
 
 function formatarValor(valor) {
@@ -343,12 +349,17 @@ radioButtons.forEach(radio => {
 
 function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, descricao, calcularImposto) {
 
+    console.log('1 - RENT: ', rentabilidadeInicial)
+
     valorInicial = valorInicial || 0;
     valorMensal = valorMensal || 0;
 
     // calcula a rentabilidade mensal com base na anual
     var rentabFinal = rentabilidadeInicial / 100;
     var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
+
+    console.log('2 - RENT: ', rentabFinal)
+    console.log('3 - RENT: ', rentabilidadeMensal)
 
     // calcuma o valor futuro dos depósitos mensais
     var montanteFinal = 0;
@@ -424,12 +435,19 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
 
 }
 
+function replaceCommas(input) {
+    return input.replace(/\./g, ',');
+}
+
+function converterParaFloat(valor) {
+    // Remove o '.' que separa a casa milhar
+    valor = valor.replace(/\./g, '');
+    // Substitui a vírgula por um ponto
+    valor = valor.replace(',', '.');
+    return parseFloat(valor);
+}
+
 function handleSimulation() {
-    function converterParaFloat(valor) {
-        // Remove o '.' que separa a casa milhar
-        valor = valor.replace('.', '');
-        return parseFloat(valor);
-    }
 
     // Obtém os valores dos campos de entrada e converte para float usando a função converterParaFloat
     var valorInicial = converterParaFloat(document.getElementById('valor_inicial').value);
@@ -513,6 +531,8 @@ function handleSimulation() {
                 notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
+
+            console.log('0 - RENT: ', rentabilidadePre)
 
             calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, true)
 
