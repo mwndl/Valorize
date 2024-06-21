@@ -352,28 +352,30 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     valorInicial = valorInicial || 0;
     valorMensal = valorMensal || 0;
 
-    // calcula a rentabilidade mensal com base na anual
+    gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial);
+
+    // Calcula a rentabilidade mensal com base na anual
     var rentabFinal = rentabilidadeInicial / 100;
     var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
 
-    // calcuma o valor futuro dos depósitos mensais
+    // Calcula o valor futuro dos depósitos mensais
     var montanteFinal = 0;
     for (var i = 1; i <= prazoMeses; i++) {
         montanteFinal += valorMensal * Math.pow(1 + rentabilidadeMensal, prazoMeses - i);
     }
 
-    // add o valor futuro do investimento inicial
+    // Adiciona o valor futuro do investimento inicial
     montanteFinal += valorInicial * Math.pow(1 + rentabilidadeMensal, prazoMeses);
 
-    // arredonda para duas casas decimais
+    // Arredonda para duas casas decimais
     montanteFinal = Math.round(montanteFinal * 100) / 100;
 
-    // calcula o total bruto, o total investido e a rentabilidade
+    // Calcula o total bruto, o total investido e a rentabilidade
     var totalBruto = montanteFinal;
     var totalInvestido = valorInicial + (valorMensal * prazoMeses);
     var rentabilidade = totalBruto - totalInvestido;
 
-    // calcula o imposto
+    // Calcula o imposto
     var aliquotaImposto = 0;
     var imposto = 0;
     var prazoDias = prazoMeses * 30;
@@ -393,11 +395,22 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
             imposto = rentabilidade * 0.15;
         }
 
-        // arredonda o imposto para duas casas decimais
+        // Arredonda o imposto para duas casas decimais
         imposto = Math.round(imposto * 100) / 100;
     }
 
-    /* EXIBINDO OS TOTAis */ 
+    // Calcula as porcentagens
+    var percentInvestido = totalInvestido / totalBruto;
+    var percentJuros = rentabilidade / totalBruto;
+    var percentImpostos = imposto / totalBruto;
+
+    // Certifica que as porcentagens são arredondadas corretamente para somarem 1
+    var totalPercent = percentInvestido + percentJuros + percentImpostos;
+    percentInvestido /= totalPercent;
+    percentJuros /= totalPercent;
+    percentImpostos /= totalPercent;
+
+    /* EXIBINDO OS TOTAIS */ 
     var valorBrutoDiv = document.getElementById('valor_bruto');
     var totalInvestidoDiv = document.getElementById('total_investido');
     var rendimentoJurosDiv = document.getElementById('rendimento_juros');
@@ -428,7 +441,93 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     rentabilidadeP.textContent = `${converterParaDuasCasas(rentabilidadeInicial)}% ${translations[selectedLanguage]['perYear']}`;
     tipoInvestimentoP.textContent = descricao;
 
+    // Calcula os valores de start e end para cada segmento
+    var startInvestido = 0;
+    var endInvestido = percentInvestido;
+    var startJuros = endInvestido;
+    var endJuros = startJuros + percentJuros;
+    var startImpostos = endJuros;
+    var endImpostos = 1;  // Finaliza em 1 (100%)
+
+    // Atualiza o gráfico de pizza
+    var myChartDiv = document.getElementById('my-chart');
+
+    if (startImpostos === 1) {
+        myChartDiv.innerHTML = `
+        <table class="charts-css pie">
+            <tr>
+              <td style="--start: ${startInvestido}; --end: ${endInvestido};"> <span class="data">Investido</span> </td>
+            </tr>
+            <tr>
+              <td style="--start: ${startJuros}; --end: ${endJuros};"> <span class="data">Juros</span> </td>
+            </tr>
+        </table>
+    `;
+    } else {
+        myChartDiv.innerHTML = `
+        <table class="charts-css pie">
+            <tr>
+              <td style="--start: ${startInvestido}; --end: ${endInvestido};"> <span class="data">Investido</span> </td>
+            </tr>
+            <tr>
+              <td style="--start: ${startJuros}; --end: ${endJuros};"> <span class="data">Juros</span> </td>
+            </tr>
+            <tr>
+              <td style="--start: ${startImpostos}; --end: ${endImpostos};"> <span class="data">IR</span> </td>
+            </tr>
+        </table>
+    `;
+    }
 }
+
+function gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial) {
+    var tabelaHTML = '<table id="tabela-investimento">';
+    tabelaHTML += `<tr>
+        <th>${translations[selectedLanguage]['monthLabel']}</th>
+        <th>${translations[selectedLanguage]['monthlyInterestLabel']}</th>
+        <th>${translations[selectedLanguage]['appliedValueLabel']}</th>
+        <th>${translations[selectedLanguage]['totalInterestLabel']}</th>
+        <th>${translations[selectedLanguage]['accumulatedTotalLabel']}</th>
+    </tr>`;
+
+    var rentabFinal = rentabilidadeInicial / 100;
+    var rentabilidadeMensal = Math.pow(1 + rentabFinal, 1 / 12) - 1;
+
+    var totalInvestido = valorInicial;
+    var totalJurosAcumulado = 0;
+    var totalAcumulado = valorInicial;
+
+    // Mês 0 (valor inicial)
+    tabelaHTML += '<tr>';
+    tabelaHTML += `<td>0</td>`;
+    tabelaHTML += `<td>R$ 0,00</td>`; // Não há juros no mês 0
+    tabelaHTML += `<td>${converterReais(totalInvestido)}</td>`;
+    tabelaHTML += `<td>R$ 0,00</td>`; // Não há juros acumulados no mês 0
+    tabelaHTML += `<td>${converterReais(totalAcumulado)}</td>`;
+    tabelaHTML += '</tr>';
+
+    // Começa a partir do primeiro mês com rendimentos (mês 1)
+    for (var i = 1; i <= prazoMeses; i++) {
+        var jurosMensais = totalAcumulado * rentabilidadeMensal;
+        totalInvestido += valorMensal;
+        totalJurosAcumulado += jurosMensais;
+        totalAcumulado += valorMensal + jurosMensais;
+
+        tabelaHTML += '<tr>';
+        tabelaHTML += `<td>${i}</td>`;
+        tabelaHTML += `<td>${converterReais(jurosMensais)}</td>`;
+        tabelaHTML += `<td>${converterReais(totalInvestido)}</td>`;
+        tabelaHTML += `<td>${converterReais(totalJurosAcumulado)}</td>`;
+        tabelaHTML += `<td>${converterReais(totalAcumulado)}</td>`;
+        tabelaHTML += '</tr>';
+    }
+
+    tabelaHTML += '</table>';
+
+    var divTabela = document.getElementById('table');
+    divTabela.innerHTML = tabelaHTML;
+}
+
 
 function replaceCommas(input) {
     return input.replace(/\./g, ',');

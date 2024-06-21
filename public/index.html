@@ -5,12 +5,13 @@
     <meta charset="UTF-8" />
     <title id="pageTitle"></title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/images/favicon_round/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" value="notranslate">
     <meta property="og:image" content="/images/favicon_square/android-chrome-512x512.png">
     <meta property="og:title" content="Valorize | Simulador">
     <meta property="og:description" content="Um simulador gratuito para investimentos de renda fixa.">
-    <link rel="icon" href="/images/favicon_round/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
         <div class="main">
             <div class="message">
                 <h1 id="mainTitle"></h1>
-                <p id="mainDescription"></p>
+                <h2 id="mainDescription"></h2>
             </div>
             <div class="simulator" id="simulator">
                 <div class="simulator_top">
@@ -204,6 +205,17 @@
                                 <p id="total_liquido"></p>
                             </div>
                         </div>
+                </div>
+                <div>
+                    <div id="pie_chart" style="display:none">
+                        <div id="my-chart">
+                        </div>
+                    </div>
+                    <div id="evolution_table">
+                        <div id="table">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="notification" class="hidden">

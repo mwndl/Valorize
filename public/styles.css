@@ -8,6 +8,17 @@ body {
     flex-direction: column;
 }
 
+::-webkit-scrollbar {
+    width: 14px;
+}
+  
+::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+}
+
 .flag {
     width: 40px;
     cursor: pointer;
@@ -32,7 +43,7 @@ h1, p {
 }
 
 .main {
-    padding: 20px;
+    padding: 30px;
     text-align: center;
 }
 
@@ -100,13 +111,57 @@ h1, p {
 }
 
 .main h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 20px;
+}
+
+.main h2 {
+    font-size: 1.2em;
 }
 
 .main p {
     font-size: 1.2em;
 }
+
+
+
+/* CHARTS */
+
+#my-chart {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  #my-chart .pie {
+  }
+  #my-chart .legend {
+  }
+
+ /* ****** */
+
+ /* TABLES */
+
+ #evolution_table {
+    max-height: 500px;
+    overflow-y: auto;
+ }
+
+  table {
+    border-collapse: collapse; 
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #ccc;
+    padding: 8px; 
+    text-align: center;
+  }
+  
+  th {
+    text-align: center;
+  }
+
+  /*********/
 
 
 /* ESTILOS INTERNOS */
@@ -157,6 +212,14 @@ h1, p {
 
 /* SIMULADOR */
 
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
 .arrow-up {
     transform: rotate(180deg);
     transition: transform 0.3s ease-in-out;
@@ -175,6 +238,7 @@ h1, p {
 #simular_novamente {
     justify-content:space-between; 
     display: flex; 
+    transition: opacity 0.5s ease;
 }
 
 .simulator {
@@ -184,6 +248,7 @@ h1, p {
     max-width: 800px;
     margin: auto;
     box-shadow: 0 11px 34px 0 rgba(0, 0, 0, .2);
+    transition: opacity 0.5s ease;
 }
 
 .simulator_section {
@@ -332,6 +397,10 @@ h1, p {
         font-size: 1.5em;
     }
 
+    .main h2 {
+        font-size: 1em;
+    }
+
     .main p {
         font-size: 1em;
     }
@@ -350,20 +419,6 @@ h1, p {
 
 }
 
-/* Estilos responsivos para desktops */
-@media (min-width: 701px) {
-    .main h1 {
-        font-size: 2.5em;
-    }
-
-    .main p {
-        font-size: 1.5em;
-    }
-
-    .main {
-        padding: 30px;
-    }
-}
 
 .resultado_box {
     position: relative;
@@ -582,6 +637,11 @@ h1, p {
 
     .arrow_down {
         background-image: url('/images/arrow_down_light.svg');
+    }
+
+      
+    td, th {
+        border: 1px solid #454545;
     }
     
 }

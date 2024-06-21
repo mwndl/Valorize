@@ -46,6 +46,13 @@ const translations = {
         "impostoDeRendaResultLabel": "Imposto de Renda",
         "totalLiquidoResultLabel": "Total Líquido",
 
+        // table
+        "monthLabel": "Mês",
+        "monthlyInterestLabel": "Juros Mensais",
+        "appliedValueLabel": "Valor Aplicado",
+        "totalInterestLabel": "Juros Totais",
+        "accumulatedTotalLabel": "Total Acumulado",
+
         "developedByLabel": "Desenvolvido por ",
         "developerNameLabel": "Marcos Wiendl",
         "bmac1Label": "Gostou? ",
@@ -117,6 +124,13 @@ const translations = {
         "aliquootaIrResultLabel": "Income Tax Rate",
         "impostoDeRendaResultLabel": "Income Tax",
         "totalLiquidoResultLabel": "Net Amount",
+
+        // table
+        "monthLabel": "Month",
+        "monthlyInterestLabel": "Monthly Interest",
+        "appliedValueLabel": "Value Applied",
+        "totalInterestLabel": "Total Interest",
+        "accumulatedTotalLabel": "Accumulated Total",
 
         "developedByLabel": "Developed by ",
         "developerNameLabel": "Marcos Wiendl",
