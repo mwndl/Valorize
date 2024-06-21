@@ -1,27 +1,28 @@
 document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
     getTRMediaMensal();
-    changeLanguage('pt');
+    setLanguageBasedOnBrowser();
 });
 
-var brFlag = document.getElementById('brFlag')
-var usFlag = document.getElementById('usFlag')
-
-brFlag.addEventListener('click', function() {
-    changeLanguage('en');
-    brFlag.style.display = 'none'
-    usFlag.style.display = 'block'
-});
-
-usFlag.addEventListener('click', function() {
-    changeLanguage('pt');
-    brFlag.style.display = 'block'
-    usFlag.style.display = 'none'
-});
-
-let selectedLanguage = 'pt';
+function setLanguageBasedOnBrowser() {
+    const userLanguage = navigator.language || navigator.userLanguage;
+    if (userLanguage === 'pt-BR' || userLanguage === 'pt-PT') {
+        changeLanguage('pt');
+    } else {
+        changeLanguage('en');
+    }
+}
 
 function changeLanguage(language) {
+
+    if (language === 'pt') {
+        brFlag.style.display = 'block'
+        usFlag.style.display = 'none'
+    } else if (language === 'en') {
+        brFlag.style.display = 'none'
+        usFlag.style.display = 'block'
+    }
+
     // Atualiza o valor do idioma selecionado na variável global
     selectedLanguage = language;
 

@@ -164,6 +164,27 @@ h1, p {
 
   /*********/
 
+  .charts_selectors {
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    margin: 0 0 5px 0;
+  }
+
+  .chart_selector {
+    padding: 10px 12px;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    border-radius: 22px;
+    margin: 0 5px 0 0;
+    user-select: none;
+  }
+
+  .chart_selector:hover {
+    background-color: #e7e7e7;
+  }
+
 
 /* ESTILOS INTERNOS */
 
@@ -569,7 +590,7 @@ h1, p {
     }
     
     .simularButton:hover {
-        background-color: #bcbcbc;
+        background-color: #e7e7e7;
     }
 
     .simulator_section_intern {
