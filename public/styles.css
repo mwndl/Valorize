@@ -522,7 +522,8 @@ h1, p {
     }
 
     .legend-item {
-        margin: 20px 5px;
+        padding: 15px;
+        font-size: 14px;
     }
 
 }
