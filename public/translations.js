@@ -46,6 +46,14 @@ const translations = {
         "impostoDeRendaResultLabel": "Imposto de Renda",
         "totalLiquidoResultLabel": "Total Líquido",
 
+        "table_selector": "Tabela",
+        "pie_chart_selector": "Gráfico de Pizza",
+        "lines_chart_selector": "Progresso",
+
+        "pieChartInvestedLabel": "Investido",
+        "pieChartInterestLabel": "Juros",
+        "pieChartTaxesLabel": "Impostos",
+
         // table
         "monthLabel": "Mês",
         "monthlyInterestLabel": "Juros Mensais",
@@ -124,6 +132,14 @@ const translations = {
         "aliquootaIrResultLabel": "Income Tax Rate",
         "impostoDeRendaResultLabel": "Income Tax",
         "totalLiquidoResultLabel": "Net Amount",
+
+        "table_selector": "Table",
+        "pie_chart_selector": "Pie Chart",
+        "lines_chart_selector": "Progress",
+
+        "pieChartInvestedLabel": "Invested",
+        "pieChartInterestLabel": "Interest",
+        "pieChartTaxesLabel": "Taxes",
 
         // table
         "monthLabel": "Month",

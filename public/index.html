@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <title id="pageTitle"></title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./charts/charts.css">
     <link rel="icon" href="/images/favicon_round/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" value="notranslate">
     <meta property="og:image" content="/images/favicon_square/android-chrome-512x512.png">
@@ -17,7 +17,7 @@
 <body>
     <div class="container">
         <div class="top">
-            <div id="flagDiv">
+            <div id="flagDiv" style="user-select: none;">
                 <img id="brFlag" style="width: 40px; height: 40px; display: none;" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f1e7-1f1f7.svg" alt="BR Flag">
                 <img id="usFlag" style="width: 40px; height: 40px; display: none;" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f1fa-1f1f8.svg" alt="US Flag">
             </div>
@@ -27,7 +27,7 @@
                 <h1 id="mainTitle"></h1>
                 <h2 id="mainDescription"></h2>
             </div>
-            <div class="simulator" id="simulator">
+            <div class="simulator" id="simulator" style="user-select: none;">
                 <div class="simulator_top">
                     <div class="simulator_section">
                         <div class="simulator_section_intern">
@@ -206,20 +206,34 @@
                             </div>
                         </div>
                 </div>
-                <div id="charts_selectors" class="charts_selectors" style="display:none">
-                    <div id="table_selector" class="chart_selector">Table</div>
-                    <div id="pie_chart_selector" class="chart_selector">Pie Chart</div>
-                    <div id="bars_chart_selector" class="chart_selector">Bar Chart</div>
+                <div id="charts_selectors" class="charts_selectors" style="">
+                    <div id="table_selector" class="impr_menu_false" onclick="showTable()"></div>
+                    <div id="pie_chart_selector" class="impr_menu_false" onclick="showChart1()"></div>
+                    <div id="lines_chart_selector" class="impr_menu_false" onclick="showChart2()" style="display: none;"></div>
                 </div>
-                <div>
-                    <div id="pie_chart" style="display:none">
+                <div style="margin: 10px 0 0 0">
+                    <div id="evolution_table" style="display:none">
+                        <div id="table"></div>
+                    </div>
+                    <div id="pie_chart" style="display:none;">
                         <div id="my-chart">
                         </div>
-                    </div>
-                    <div id="evolution_table">
-                        <div id="table">
-
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="legend-color blue"></div>
+                                <span id="pieChartInvestedLabel"></span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color green"></div>
+                                <span id="pieChartInterestLabel"></span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color red"></div>
+                                <span id="pieChartTaxesLabel"></span>
+                            </div>
                         </div>
+                    </div>
+                    <div id="lines_chart" style="display:none;">
                     </div>
                 </div>
             </div>

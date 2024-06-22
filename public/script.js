@@ -69,6 +69,7 @@ function simularNovamenteButton() {
     if (divSimulator.style.display === 'none') {
         divSimulator.style.display = 'block';
     }
+    hideCharts()
 }
 
 /*  ************************ */
@@ -452,43 +453,104 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
 
     // Atualiza o gráfico de pizza
     var myChartDiv = document.getElementById('my-chart');
-
-    if (startImpostos === 1) {
-        myChartDiv.innerHTML = `
-        <table class="charts-css pie">
-            <tr>
-              <td style="--start: ${startInvestido}; --end: ${endInvestido};"> <span class="data">Investido</span> </td>
-            </tr>
-            <tr>
-              <td style="--start: ${startJuros}; --end: ${endJuros};"> <span class="data">Juros</span> </td>
-            </tr>
-        </table>
-    `;
-    } else {
-        myChartDiv.innerHTML = `
-        <table class="charts-css pie">
-            <tr>
-              <td style="--start: ${startInvestido}; --end: ${endInvestido};"> <span class="data">Investido</span> </td>
-            </tr>
-            <tr>
-              <td style="--start: ${startJuros}; --end: ${endJuros};"> <span class="data">Juros</span> </td>
-            </tr>
-            <tr>
-              <td style="--start: ${startImpostos}; --end: ${endImpostos};"> <span class="data">IR</span> </td>
-            </tr>
-        </table>
-    `;
-    }
+    myChartDiv.innerHTML = `
+    <table class="charts-css pie">
+        <tr>
+          <td style="--start: ${startInvestido}; --end: ${endInvestido};"> <span class="data"></span> </td>
+        </tr>
+        <tr>
+          <td style="--start: ${startJuros}; --end: ${endJuros};"> <span class="data"></span> </td>
+        </tr>
+        <tr>
+          <td style="--start: ${startImpostos}; --end: ${endImpostos};"> <span class="data"></span> </td>
+        </tr>
+    </table>
+`;
 }
 
+/* BOTÕES SELETORES */
+
+function showTable() {
+    const tableButton = document.getElementById('table_selector');
+    const chart1Button = document.getElementById('pie_chart_selector');
+    const chart2Button = document.getElementById('lines_chart_selector');
+
+    const tableContainer = document.getElementById('evolution_table');
+    const chart1Container = document.getElementById('pie_chart');
+    const chart2Container = document.getElementById('lines_chart');
+
+    tableButton.className = 'impr_menu_true'
+    chart1Button.className = 'impr_menu_false'
+    chart2Button.className = 'impr_menu_false'
+
+    tableContainer.style = 'display:block'
+    chart1Container.style = 'display:none'
+    chart2Container.style = 'display:none'
+}
+
+function showChart1() {
+    const tableButton = document.getElementById('table_selector');
+    const chart1Button = document.getElementById('pie_chart_selector');
+    const chart2Button = document.getElementById('lines_chart_selector');
+
+    const tableContainer = document.getElementById('evolution_table');
+    const chart1Container = document.getElementById('pie_chart');
+    const chart2Container = document.getElementById('lines_chart');
+
+    tableButton.className = 'impr_menu_false'
+    chart1Button.className = 'impr_menu_true'
+    chart2Button.className = 'impr_menu_false'
+
+    tableContainer.style = 'display:none'
+    chart1Container.style = 'display:flex'
+    chart2Container.style = 'display:none'
+}
+
+function showChart2() {
+    const tableButton = document.getElementById('table_selector');
+    const chart1Button = document.getElementById('pie_chart_selector');
+    const chart2Button = document.getElementById('lines_chart_selector');
+
+    const tableContainer = document.getElementById('evolution_table');
+    const chart1Container = document.getElementById('pie_chart');
+    const chart2Container = document.getElementById('lines_chart');
+
+    tableButton.className = 'impr_menu_false'
+    chart1Button.className = 'impr_menu_false'
+    chart2Button.className = 'impr_menu_true'
+
+    tableContainer.style = 'display:none'
+    chart1Container.style = 'display:none'
+    chart2Container.style = 'display:block'
+}
+
+function hideCharts() {
+    const tableButton = document.getElementById('table_selector');
+    const chart1Button = document.getElementById('pie_chart_selector');
+    const chart2Button = document.getElementById('lines_chart_selector');
+
+    const tableContainer = document.getElementById('evolution_table');
+    const chart1Container = document.getElementById('pie_chart');
+    const chart2Container = document.getElementById('lines_chart');
+
+    tableButton.className = 'impr_menu_false'
+    chart1Button.className = 'impr_menu_false'
+    chart2Button.className = 'impr_menu_false'
+
+    tableContainer.style = 'display:none'
+    chart1Container.style = 'display:none'
+    chart2Container.style = 'display:none'
+}
+
+/* ***************** */
 function gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial) {
     var tabelaHTML = '<table id="tabela-investimento">';
     tabelaHTML += `<tr>
-        <th>${translations[selectedLanguage]['monthLabel']}</th>
-        <th>${translations[selectedLanguage]['monthlyInterestLabel']}</th>
-        <th>${translations[selectedLanguage]['appliedValueLabel']}</th>
-        <th>${translations[selectedLanguage]['totalInterestLabel']}</th>
-        <th>${translations[selectedLanguage]['accumulatedTotalLabel']}</th>
+        <th>Mês</th>
+        <th>Juros Mensais</th>
+        <th>Valor Aplicado</th>
+        <th>Juros Acumulados</th>
+        <th>Total Acumulado</th>
     </tr>`;
 
     var rentabFinal = rentabilidadeInicial / 100;
@@ -498,21 +560,25 @@ function gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabil
     var totalJurosAcumulado = 0;
     var totalAcumulado = valorInicial;
 
-    // Mês 0 (valor inicial)
+    var valoresInvestidos = [totalInvestido];
+    var valoresTotais = [totalAcumulado];
+
     tabelaHTML += '<tr>';
     tabelaHTML += `<td>0</td>`;
-    tabelaHTML += `<td>R$ 0,00</td>`; // Não há juros no mês 0
+    tabelaHTML += `<td>R$ 0,00</td>`;
     tabelaHTML += `<td>${converterReais(totalInvestido)}</td>`;
-    tabelaHTML += `<td>R$ 0,00</td>`; // Não há juros acumulados no mês 0
+    tabelaHTML += `<td>R$ 0,00</td>`;
     tabelaHTML += `<td>${converterReais(totalAcumulado)}</td>`;
     tabelaHTML += '</tr>';
 
-    // Começa a partir do primeiro mês com rendimentos (mês 1)
     for (var i = 1; i <= prazoMeses; i++) {
         var jurosMensais = totalAcumulado * rentabilidadeMensal;
         totalInvestido += valorMensal;
         totalJurosAcumulado += jurosMensais;
         totalAcumulado += valorMensal + jurosMensais;
+
+        valoresInvestidos.push(totalInvestido);
+        valoresTotais.push(totalAcumulado);
 
         tabelaHTML += '<tr>';
         tabelaHTML += `<td>${i}</td>`;
@@ -524,10 +590,10 @@ function gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabil
     }
 
     tabelaHTML += '</table>';
+    document.getElementById('table').innerHTML = tabelaHTML;
 
-    var divTabela = document.getElementById('table');
-    divTabela.innerHTML = tabelaHTML;
 }
+
 
 
 function replaceCommas(input) {

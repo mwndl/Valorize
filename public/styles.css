@@ -58,6 +58,7 @@ h1, p {
     padding: 12px 20px;
     font-family: 'Arial', sans-serif;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    user-select: none;
 }
 
 .footer_link {
@@ -127,15 +128,47 @@ h1, p {
 
 /* CHARTS */
 
+#pie_chart {
+    justify-content: space-around;
+}
+
 #my-chart {
     width: 100%;
     max-width: 300px;
-    margin: 0 auto;
-  }
-  #my-chart .pie {
-  }
-  #my-chart .legend {
-  }
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid white;
+}
+.blue {
+    background-color: #5896fc;
+}
+.green {
+    background-color: #70d06a;
+}
+.red {
+    background-color: #f06a6a;
+}
+
+
+
 
  /* ****** */
 
@@ -171,25 +204,54 @@ h1, p {
     margin: 0 0 5px 0;
   }
 
-  .chart_selector {
-    padding: 10px 12px;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
-    border-radius: 22px;
-    margin: 0 5px 0 0;
-    user-select: none;
-  }
 
-  .chart_selector:hover {
-    background-color: #e7e7e7;
-  }
+
+    .impr_menu_true {
+        display: flex;
+        background-color: #fff;
+        padding: 5px 12px;
+        border-radius: 22px;
+        font-size: 16px;
+        height: 30px;
+        text-align: center;
+        align-items: center;
+        margin: 0 5px 0 0;
+        color: #000;
+        cursor: pointer;
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        user-select: none;
+    }
+
+    .impr_menu_true:hover {
+        background-color: #d2d2d2;
+    }
+
+    .impr_menu_false {
+        display: flex;
+        background-color: #464646;
+        padding: 5px 12px;
+        border-radius: 22px;
+        font-size: 16px;
+        height: 30px;
+        text-align: center;
+        align-items: center;
+        margin: 0 5px 0 0;
+        color: #ffffff;
+        cursor: pointer;
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        user-select: none;
+    }
+
+    .impr_menu_false:hover {
+        background-color: #383838;
+    }
 
 
 /* ESTILOS INTERNOS */
 
 .message {
     margin: 0 0 30px 0;
+    user-select: none;
 }
 
 #notification {
@@ -437,6 +499,30 @@ h1, p {
 
     .simulator_main {
         width: 100%;
+    }
+
+    td, th {
+        border: 0.5px solid #ccc;
+        padding: 5px; 
+        font-size: 50%;
+    }
+
+    #my-chart {
+        padding: 20px;
+    }
+
+    #pie_chart {
+        flex-wrap: wrap;
+    }
+
+    .legend {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .legend-item {
+        margin: 20px 5px;
     }
 
 }
