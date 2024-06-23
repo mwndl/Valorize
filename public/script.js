@@ -826,21 +826,48 @@ function applyColorScheme() {
 // Ouvir por mudanças na preferência de esquema de cores
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyColorScheme);
 
-// Função para registrar o Service Worker com forçar a atualização
 function registerServiceWorker() {
     navigator.serviceWorker.register('/service-worker.js')
         .then(registration => {
             console.log('Service Worker registrado com sucesso:', registration);
-            // Forçar a ativação imediata do novo Service Worker
+
+            // Verificar se existe um Service Worker esperando para ser ativado
             if (registration.waiting) {
-                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                updateServiceWorker(registration);
+                return;
             }
+
+            // Verificar se existe um Service Worker instalando
+            if (registration.installing) {
+                trackInstalling(registration.installing);
+                return;
+            }
+
+            // Ouvir mudanças no estado do Service Worker
+            registration.addEventListener('updatefound', () => {
+                trackInstalling(registration.installing);
+            });
         }).catch(error => {
             console.log('Falha ao registrar o Service Worker:', error);
         });
 }
 
-// Registrar o Service Worker na carga inicial da página
+function trackInstalling(worker) {
+    worker.addEventListener('statechange', () => {
+        if (worker.state === 'installed') {
+            updateServiceWorker(worker);
+        }
+    });
+}
+
+function updateServiceWorker(worker) {
+    worker.postMessage({ type: 'SKIP_WAITING' });
+}
+
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+    window.location.reload();
+});
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         registerServiceWorker();
