@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
     getTRMediaMensal();
     setLanguageBasedOnBrowser();
+    applyColorScheme(); // service worker
 });
 
 function setLanguageBasedOnBrowser() {
@@ -310,7 +311,7 @@ function handleRadioChange(event) {
             document.getElementById('rent_ipca').style.display = 'none';
             document.getElementById('rent_poupanca').style.display = 'flex';
             document.getElementById('rent_input_poupanca').value = rentPoupanca.toFixed(2)
-            
+
             break;
         default:
             console.log("Nenhuma opção válida selecionada");
@@ -412,7 +413,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     percentJuros /= totalPercent;
     percentImpostos /= totalPercent;
 
-    /* EXIBINDO OS TOTAIS */ 
+    /* EXIBINDO OS TOTAIS */
     var valorBrutoDiv = document.getElementById('valor_bruto');
     var totalInvestidoDiv = document.getElementById('total_investido');
     var rendimentoJurosDiv = document.getElementById('rendimento_juros');
@@ -798,12 +799,30 @@ function handleSimulation() {
 // Calcular investimento ao clicar no botão "Simular"
 document.getElementById('simularButton').addEventListener('click', handleSimulation);
 
+
+/* SERVICE WORKER */
+
+// Detectar o esquema de cores do usuário e aplicar a cor de fundo correspondente
+function applyColorScheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // O usuário prefere tema escuro
+        document.documentElement.style.setProperty('--theme_color', '#181818');
+    } else {
+        // O usuário prefere tema claro
+        document.documentElement.style.setProperty('--theme_color', '#fafafa');
+    }
+}
+
+// Ouvir por mudanças na preferência de esquema de cores
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyColorScheme);
+
+// Registrar o Service Worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js').then(registration => {
-        console.log('Service Worker registrado com sucesso:', registration);
-      }).catch(error => {
-        console.log('Falha ao registrar o Service Worker:', error);
-      });
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+            console.log('Service Worker registrado com sucesso:', registration);
+        }).catch(error => {
+            console.log('Falha ao registrar o Service Worker:', error);
+        });
     });
-  }
+}
