@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
-    getTRMediaMensal();
     setLanguageBasedOnBrowser();
     applyColorScheme(); // service worker
 });
