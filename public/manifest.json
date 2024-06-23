@@ -4,8 +4,8 @@
     "description": "Simulador gratuito para aplicações em renda fixa",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#357bff",
-    "theme_color": "#000000",
+    "background_color": "#181818",
+    "theme_color": "#181818",
     "icons": [
       {
         "src": "/images/favicon_round/android-chrome-192x192.png",
