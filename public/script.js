@@ -853,13 +853,23 @@ function applyColorScheme() {
 // Ouvir por mudanças na preferência de esquema de cores
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyColorScheme);
 
-// Registrar o Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+// Função para registrar o Service Worker com forçar a atualização
+function registerServiceWorker() {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
             console.log('Service Worker registrado com sucesso:', registration);
+            // Forçar a ativação imediata do novo Service Worker
+            if (registration.waiting) {
+                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
         }).catch(error => {
             console.log('Falha ao registrar o Service Worker:', error);
         });
+}
+
+// Registrar o Service Worker na carga inicial da página
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        registerServiceWorker();
     });
 }
