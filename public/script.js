@@ -13,6 +13,14 @@ function setLanguageBasedOnBrowser() {
     }
 }
 
+function toggleLanguage() {
+    if (selectedLanguage === 'pt') {
+        changeLanguage('en')
+    } else if (selectedLanguage === 'en') {
+        changeLanguage('pt')
+    }
+}
+
 function changeLanguage(language) {
 
     if (language === 'pt') {
@@ -210,20 +218,6 @@ let rentPoupanca;
 
 async function getSelic() {
     try {
-        // Verifica se há um valor da SELIC armazenado em localStorage
-        const cachedSelic = localStorage.getItem('selicCache');
-        if (cachedSelic !== null) {
-            const cachedData = JSON.parse(cachedSelic);
-            const now = new Date();
-            if (now.getTime() < cachedData.expiration) {
-                console.log('Retornando valor da SELIC do cache do navegador:', cachedData.value);
-                return cachedData.value;
-            } else {
-                // Cache expirado, remove o item do localStorage
-                localStorage.removeItem('selicCache');
-            }
-        }
-
         // Faz a solicitação usando a API Fetch
         const response = await fetch('https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json');
 
@@ -234,33 +228,12 @@ async function getSelic() {
 
         // Obtém o valor SELIC da resposta
         const data = await response.json();
-        const selicValue = data[0].valor; // Obtendo o valor da SELIC da resposta
-
-        // Salva o valor SELIC em localStorage com validade de 10 dias
-        const now = new Date();
-        const expiration = now.getTime() + 5 * 24 * 60 * 60 * 1000; // 5 dias em milissegundos
-        const cacheData = {
-            value: selicValue,
-            expiration: expiration
-        };
-        localStorage.setItem('selicCache', JSON.stringify(cacheData));
-        console.log('Valor da SELIC atualizado no cache do navegador:', selicValue);
+        selicValue = data[0].valor; // Definindo o valor da variável global
 
         // Retorna o valor SELIC
         return selicValue;
     } catch (error) {
-        // Caso ocorra um erro, tenta retornar o valor do cache se estiver dentro do prazo de validade
-        const cachedSelic = localStorage.getItem('selicCache');
-        if (cachedSelic !== null) {
-            const cachedData = JSON.parse(cachedSelic);
-            const now = new Date();
-            if (now.getTime() < cachedData.expiration) {
-                console.log('Retornando valor da SELIC do cache do navegador devido a um erro:', cachedData.value);
-                return cachedData.value;
-            }
-        }
-        
-        // Se não houver valor no cache válido e ocorrer um erro na requisição, lança o erro para ser tratado pelo chamador
+        // Lança o erro para ser tratado pelo chamador da função
         throw error;
     }
 }

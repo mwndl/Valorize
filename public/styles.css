@@ -254,6 +254,20 @@ h1, p {
     user-select: none;
 }
 
+#mainTitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    color: #333;
+    margin: 0;
+  }
+
+  #mainDescription {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    color: #666;
+    margin: 0;
+  }
+
 #notification {
     position: fixed;
     bottom: 30px;
@@ -489,8 +503,12 @@ h1, p {
         font-size: 1em;
     }
 
-    .top, .main, .footer {
+    .footer {
         padding: 15px;
+    }
+
+    .main {
+        padding: 0 15px 10px 15px;
     }
 
     .simulator_section_intern {
@@ -637,6 +655,14 @@ h1, p {
 
     h1, p, label {
         color: #ffffff;
+    }
+
+    #mainTitle {
+        color: #f7f7f7;
+    }
+    
+    #mainDescription {
+        color: #c4c4c4;
     }
 
     .simulator_section_intern p, label {

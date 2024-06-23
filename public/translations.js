@@ -3,8 +3,8 @@ const translations = {
     "pt": {
         "pageTitle": "Valorize | Simulador Renda Fixa",
 
-        "mainTitle": "Simulador de Renda Fixa",
-        "mainDescription": "Utilize nossa calculadora de renda fixa abaixo",
+        "mainTitle": "Valorize",
+        "mainDescription": "Simulador de aplicações em renda fixa",
         "initialInvestmentLabel": "Investimento Inicial",
         "monthlyInvestmentLabel": "Aporte Mensal",
 
@@ -90,8 +90,8 @@ const translations = {
     "en": {
         "pageTitle": "Valorize | Fixed Income Simulator",
 
-        "mainTitle": "Fixed Income Simulator",
-        "mainDescription": "Use our fixed income calculator below",
+        "mainTitle": "Valorize",
+        "mainDescription": "Fixed income application simulator",
         "initialInvestmentLabel": "Initial Investment",
         "monthlyInvestmentLabel": "Monthly Investment",
 
