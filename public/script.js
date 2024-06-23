@@ -806,10 +806,12 @@ document.getElementById('simularButton').addEventListener('click', handleSimulat
 function applyColorScheme() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         // O usuário prefere tema escuro
+        document.documentElement.style.setProperty('--background-color', '#181818');
         document.documentElement.style.setProperty('--theme_color', '#181818');
     } else {
         // O usuário prefere tema claro
-        document.documentElement.style.setProperty('--theme_color', '#fafafa');
+        document.documentElement.style.setProperty('--background-color', '#fafafa');
+        document.documentElement.style.setProperty('--theme_color', '#181818');
     }
 }
 
