@@ -511,6 +511,20 @@ h1, p {
         padding: 0 15px 10px 15px;
     }
 
+    #mainTitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2em;
+        color: #333;
+        margin: 0;
+      }
+    
+      #mainDescription {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1em;
+        color: #666;
+        margin: 0;
+      }
+
     .simulator_section_intern {
         width: 100%; 
     }
