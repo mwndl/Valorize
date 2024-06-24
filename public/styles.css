@@ -2,7 +2,7 @@
 html {
     touch-action: manipulation;
   }
-  
+
 body {
     background-color: #fafafa;
     color: black;
@@ -10,6 +10,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 
@@ -41,10 +42,10 @@ h1, p {
 
 .top {
     display: flex;
-    justify-content: flex-end; 
+    justify-content: space-between; 
     align-items: center;
     text-align: center;
-    padding: 0 5px;
+    padding: 10px 15px;
 }
 
 .main {
@@ -261,7 +262,7 @@ h1, p {
 
 #mainTitle {
     font-family: 'Montserrat', sans-serif;
-    font-size: 3em;
+    font-size: 1.5em;
     color: #333;
     margin: 0;
   }
@@ -496,6 +497,11 @@ h1, p {
 
 /* Estilos responsivos para dispositivos móveis */
 @media (max-width: 700px) {
+
+    .top {
+        padding: 8px 12px;
+    }
+
     .main h1 {
         font-size: 1.5em;
     }
@@ -518,7 +524,7 @@ h1, p {
 
     #mainTitle {
         font-family: 'Montserrat', sans-serif;
-        font-size: 2em;
+        font-size: 1.8em;
         color: #333;
         margin: 0;
       }
