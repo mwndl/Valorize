@@ -260,19 +260,26 @@ h1, p {
     user-select: none;
 }
 
-#mainTitle {
+#topTitle {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
     color: #333;
     margin: 0;
-  }
+    user-select: none;
+}
+
+#mainTitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #333;
+}
 
   #mainDescription {
     font-family: 'Roboto', sans-serif;
     font-size: 1.5em;
     color: #666;
     margin: 0;
-  }
+}
 
 #notification {
     position: fixed;
@@ -499,7 +506,11 @@ h1, p {
 @media (max-width: 700px) {
 
     .top {
-        padding: 8px 12px;
+        padding: 15px 12px;
+    }
+
+    .message {
+        display:none;
     }
 
     .main h1 {
@@ -522,11 +533,14 @@ h1, p {
         padding: 0 15px 10px 15px;
     }
 
+    #topTitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8em;
+    }
+
     #mainTitle {
         font-family: 'Montserrat', sans-serif;
         font-size: 1.8em;
-        color: #333;
-        margin: 0;
       }
     
       #mainDescription {
@@ -680,6 +694,10 @@ h1, p {
 
     h1, p, label {
         color: #ffffff;
+    }
+
+    #topTitle {
+        color: #f7f7f7;
     }
 
     #mainTitle {

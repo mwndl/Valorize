@@ -2,9 +2,10 @@
 const translations = {
     "pt": {
         "pageTitle": "Valorize | Simulador Renda Fixa",
+        "topTitle": "Valorize",
 
-        "mainTitle": "Valorize",
-        "mainDescription": "Simulador de aplicações em renda fixa",
+        "mainTitle": "Simulador Renda Fixa",
+        "mainDescription": "Um simulador completo para seus investimentos",
         "initialInvestmentLabel": "Investimento Inicial",
         "monthlyInvestmentLabel": "Aporte Mensal",
 
@@ -89,9 +90,10 @@ const translations = {
 
     "en": {
         "pageTitle": "Valorize | Fixed Income Simulator",
+        "topTitle": "Valorize",
 
-        "mainTitle": "Valorize",
-        "mainDescription": "Fixed income application simulator",
+        "mainTitle": "Fixed Income Simulator",
+        "mainDescription": "A complete simulator for your investments",
         "initialInvestmentLabel": "Initial Investment",
         "monthlyInvestmentLabel": "Monthly Investment",
 
