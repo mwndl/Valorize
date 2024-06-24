@@ -807,6 +807,22 @@ function handleSimulation() {
 // Calcular investimento ao clicar no botão "Simular"
 document.getElementById('simularButton').addEventListener('click', handleSimulation);
 
+/* DISABLE PINCH AND ZOOM */
+
+document.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+    document.body.style.zoom = 0.99;
+});
+
+document.addEventListener('gesturechange', function(e) {
+    e.preventDefault();
+    document.body.style.zoom = 0.99;
+});
+
+document.addEventListener('gestureend', function(e) {
+    e.preventDefault();
+    document.body.style.zoom = 0.99;
+});
 
 /* SERVICE WORKER */
 

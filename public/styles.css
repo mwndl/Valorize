@@ -1,4 +1,8 @@
 /* Estilos padrão (modo claro e escuro) */
+html {
+    touch-action: manipulation;
+  }
+  
 body {
     background-color: #fafafa;
     color: black;
@@ -7,6 +11,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 
 ::-webkit-scrollbar {
     width: 14px;
