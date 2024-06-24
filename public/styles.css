@@ -183,7 +183,6 @@ h1, p {
  #evolution_table {
     max-height: 500px;
     overflow-y: auto;
-    margin-bottom: 10px;
  }
 
   table {
@@ -205,36 +204,35 @@ h1, p {
 
   .charts_selectors {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     flex-direction: row;
     margin: 0 0 5px 0;
   }
 
 
-
-    .impr_menu_true {
-        display: flex;
-        background-color: #fff;
-        padding: 5px 12px;
-        border-radius: 22px;
-        font-size: 16px;
-        height: 30px;
-        text-align: center;
-        align-items: center;
-        margin: 0 5px 0 0;
-        color: #000;
-        cursor: pointer;
-        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-        user-select: none;
-    }
+  .impr_menu_true {
+    display: flex;
+    background-color: #2a2a2a;
+    padding: 5px 12px;
+    border-radius: 22px;
+    font-size: 16px;
+    height: 30px;
+    text-align: center;
+    align-items: center;
+    margin: 0 5px 0 0;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
 
     .impr_menu_true:hover {
-        background-color: #d2d2d2;
+        background-color: #4d4d4d;
     }
 
     .impr_menu_false {
         display: flex;
-        background-color: #464646;
+        background-color: #f8f8f8;
         padding: 5px 12px;
         border-radius: 22px;
         font-size: 16px;
@@ -242,14 +240,14 @@ h1, p {
         text-align: center;
         align-items: center;
         margin: 0 5px 0 0;
-        color: #ffffff;
+        color: #141414;
         cursor: pointer;
-        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.1);
         user-select: none;
     }
 
     .impr_menu_false:hover {
-        background-color: #383838;
+        background-color: #ebebeb;
     }
 
 
@@ -824,6 +822,24 @@ h1, p {
       
     td, th {
         border: 1px solid #454545;
+    }
+
+    .impr_menu_true {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .impr_menu_true:hover {
+        background-color: #d2d2d2;
+    }
+
+    .impr_menu_false {
+        background-color: #464646;
+        color: #ffffff;
+    }
+
+    .impr_menu_false:hover {
+        background-color: #383838;
     }
     
 }

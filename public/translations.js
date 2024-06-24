@@ -15,6 +15,17 @@ const translations = {
         "tesouroRadioLabel": "Tesouro Selic",
         "poupancaRadioLabel": "Poupança",
 
+        "description1": "CBD Pós-Fixado",
+        "description2": "CBD Pré-Fixado",
+        "description3": "CBD IPCA+",
+        "description4": "LCI/LCA Pós-Fixado",
+        "description5": "LCI/LCA Pré-Fixado",
+        "description6": "LCI/LCA IPCA+",
+        "description7": "Tesouro Direto Pós-Fixado",
+        "description8": "Tesouro Direto Pré-Fixado",
+        "description9": "Tesouro Direto IPCA+",
+        "description10": "Poupança",
+
         "rentTypeLabel": "Tipo de rentabilidade",
         "posRadioLabel": "Pós-fixado",
         "preRadioLabel": "Pré-fixado",
@@ -50,6 +61,7 @@ const translations = {
         "table_selector": "Tabela",
         "pie_chart_selector": "Gráfico de Pizza",
         "lines_chart_selector": "Progresso",
+        "share_results": "Compartilhar Resultados",
 
         "pieChartInvestedLabel": "Investido",
         "pieChartInterestLabel": "Juros",
@@ -71,6 +83,8 @@ const translations = {
         "days": "dias",
         "months": "meses",
         "perYear": "ao ano",
+
+        "copySuccessful": "URL copiada para a área de transferência",
 
         // tratamento de erros
         "missingValueError": "Informe algum valor para calcular",
@@ -100,8 +114,19 @@ const translations = {
         "investmentTypeLabel": "What type of investment?",
         "cbdRadioLabel": "CDB, LC or Government Bonds",
         "lciRadioLabel": "LCI / LCA",
-        "tesouroRadioLabel": "Treasury Selic",
+        "tesouroRadioLabel": "Treasury Direct",
         "poupancaRadioLabel": "Savings Account",
+
+        "description1": "CBD Post-Fixed",
+        "description2": "CBD Pre-Fixed",
+        "description3": "CBD IPCA+",
+        "description4": "LCI/LCA Post-Fixed",
+        "description5": "LCI/LCA Pre-Fixed",
+        "description6": "LCI/LCA IPCA+",
+        "description7": "Treasury Direct Post-Fixed",
+        "description8": "Treasury Direct Pre-Fixed",
+        "description9": "Treasury Direct IPCA+",
+        "description10": "Savings Account",
 
         "rentTypeLabel": "Type of yield",
         "posRadioLabel": "Post-fixed",
@@ -138,6 +163,7 @@ const translations = {
         "table_selector": "Table",
         "pie_chart_selector": "Pie Chart",
         "lines_chart_selector": "Progress",
+        "share_results": "Share Results",
 
         "pieChartInvestedLabel": "Invested",
         "pieChartInterestLabel": "Interest",
@@ -159,6 +185,8 @@ const translations = {
         "days": "days",
         "months": "months",
         "perYear": "per year",
+
+        "copySuccessful": "URL copied to clipboard",
 
         // tratamento de erros 
         "missingValueError": "Please provide some values to calculate",

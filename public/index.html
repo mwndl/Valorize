@@ -212,11 +212,16 @@
                         </div>
                 </div>
                 <div id="charts_selectors" class="charts_selectors" style="">
-                    <div id="table_selector" class="impr_menu_false" onclick="showTable()"></div>
-                    <div id="pie_chart_selector" class="impr_menu_false" onclick="showChart1()"></div>
-                    <div id="lines_chart_selector" class="impr_menu_false" onclick="showChart2()" style="display: none;"></div>
+                    <div style="display:flex">
+                        <div id="table_selector" class="impr_menu_false" onclick="showTable()"></div>
+                        <div id="pie_chart_selector" class="impr_menu_false" onclick="showChart1()"></div>
+                        <div id="lines_chart_selector" class="impr_menu_false" onclick="showChart2()" style="display: none;"></div>
+                    </div>
+                    <div>
+                        <div id="share_results" class="impr_menu_true" onclick="copyUrl()"></div>
+                    </div>
                 </div>
-                <div style="margin: 10px 0 0 0">
+                <div style="margin: 10px 0">
                     <div id="evolution_table" style="display:none">
                         <div id="table"></div>
                     </div>

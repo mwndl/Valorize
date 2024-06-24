@@ -2,7 +2,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
     setLanguageBasedOnBrowser();
     applyColorScheme(); // service worker
+    hasRequiredParameters()
 });
+
+function getQueryParameter(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+function setQueryParameter(param, value) {
+    const url = new URL(window.location);
+    url.searchParams.set(param, value);
+    window.history.replaceState({}, '', url);
+}
 
 function setLanguageBasedOnBrowser() {
     const userLanguage = navigator.language || navigator.userLanguage;
@@ -60,6 +72,30 @@ function setElementTitles(selectedLanguage) {
     document.getElementById('bmac2Label').title = translations[selectedLanguage]['bmac2LabelTitle'];
     document.getElementById('github_icon').title = translations[selectedLanguage]['githubIconTitle'];
 
+}
+
+function copyUrl() {
+    // Obtém a URL atual do navegador
+    var url = window.location.href;
+
+    // Cria um elemento de input para inserir a URL
+    var inputElement = document.createElement('input');
+    inputElement.style.position = 'fixed';
+    inputElement.style.opacity = 0;
+    inputElement.value = url;
+    document.body.appendChild(inputElement);
+
+    // Seleciona o texto dentro do input
+    inputElement.select();
+
+    // Executa o comando de cópia
+    document.execCommand('copy');
+
+    // Remove o elemento de input
+    document.body.removeChild(inputElement);
+
+    // Alerta ou mensagem de confirmação opcional
+    notification(translations[selectedLanguage]['copySuccessful']);
 }
 
 
@@ -357,6 +393,36 @@ radioButtons.forEach(radio => {
     radio.addEventListener('change', handleRadioChange);
 });
 
+function hasRequiredParameters() {
+    const requiredParams = [
+        'initial_value', 
+        'monthly_value', 
+        'term', 
+        'yield', 
+        'description', 
+        'taxes'
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    for (let param of requiredParams) {
+        if (!urlParams.has(param)) {
+            return false;
+        }
+    }
+
+    // Extraindo os valores dos parâmetros
+    const initialValue = parseFloat(urlParams.get('initial_value'));
+    const monthlyValue = parseFloat(urlParams.get('monthly_value'));
+    const term = parseInt(urlParams.get('term'), 10);
+    const yieldRate = parseFloat(urlParams.get('yield'));
+    const description = String(urlParams.get('description'));
+    const taxes = String(urlParams.get('taxes'));
+
+    // Chama a função calcularInvestimento com os parâmetros extraídos
+    calcularInvestimento(initialValue, monthlyValue, term, yieldRate, description, taxes);
+    return true;
+}
+
 
 function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial, descricao, calcularImposto) {
 
@@ -364,6 +430,12 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     valorMensal = valorMensal || 0;
 
     gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial);
+    setQueryParameter("initial_value", valorInicial)
+    setQueryParameter("monthly_value", valorMensal)
+    setQueryParameter("term", prazoMeses)
+    setQueryParameter("yield", rentabilidadeInicial)
+    setQueryParameter("description", descricao)
+    setQueryParameter("taxes", calcularImposto)
 
     // Calcula a rentabilidade mensal com base na anual
     var rentabFinal = rentabilidadeInicial / 100;
@@ -391,7 +463,7 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
     var imposto = 0;
     var prazoDias = prazoMeses * 30;
 
-    if (calcularImposto) {
+    if (calcularImposto === '1') {
         if (prazoDias < 180) {
             aliquotaImposto = 22.5;
             imposto = rentabilidade * 0.225;
@@ -408,6 +480,30 @@ function calcularInvestimento(valorInicial, valorMensal, prazoMeses, rentabilida
 
         // Arredonda o imposto para duas casas decimais
         imposto = Math.round(imposto * 100) / 100;
+    }
+
+    if (descricao === '1') {
+        descricao = translations[selectedLanguage]['description1']
+    } else if (descricao === '2') {
+        descricao = translations[selectedLanguage]['description2']
+    } else if (descricao === '3') {
+        descricao = translations[selectedLanguage]['description3']
+    } else if (descricao === '4') {
+        descricao = translations[selectedLanguage]['description4']
+    } else if (descricao === '5') {
+        descricao = translations[selectedLanguage]['description5']
+    } else if (descricao === '6') {
+        descricao = translations[selectedLanguage]['description6']
+    } else if (descricao === '7') {
+        descricao = translations[selectedLanguage]['description7']
+    } else if (descricao === '8') {
+        descricao = translations[selectedLanguage]['description8']
+    } else if (descricao === '9') {
+        descricao = translations[selectedLanguage]['description9']
+    } else if (descricao === '10') {
+        descricao = translations[selectedLanguage]['description10']
+    } else {
+        descricao = '-'
     }
 
     // Calcula as porcentagens
@@ -676,10 +772,11 @@ function handleSimulation() {
 
     /* CDBs */
     if (tipoInvestimento === "cdb_radio") {
-        var descricao = 'CDB, LC ou Títulos Públicos'
 
         /* CDB PÓS-FIXADO */
         if (tipoRentabilidade === "pos_radio") {
+            var descricao = '1' // CBD Pós-Fixado
+
 
             if (!rentabilidadePos) {
                 notification(translations[selectedLanguage]['missingProfitError'])
@@ -690,22 +787,25 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '1')
 
 
 
             /* CDB PRÉ-FIXADO */
         } else if (tipoRentabilidade === "pre_radio") {
+            var descricao = '2' // CBD Pré-Fixado
+
 
             if (!rentabilidadePre) {
                 notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, true)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, '1')
 
             /* CDB IPCA */
         } else if (tipoRentabilidade === "ipca_radio") {
+            var descricao = '3' // CBD IPCA+
 
             if (!rentabilidadeIpca) {
                 notification(translations[selectedLanguage]['missingProfitError'])
@@ -719,10 +819,9 @@ function handleSimulation() {
         /* LCIs */
     } else if (tipoInvestimento === "lci_radio") {
 
-        var descricao = 'LCI / LCA'
-
         /* LCI PÓS-FIXADO */
         if (tipoRentabilidade === "pos_radio") {
+            var descricao = '4' // LCI/LCA Pós-Fixado
 
             if (!rentabilidadePos) {
                 notification(translations[selectedLanguage]['missingProfitError'])
@@ -733,20 +832,22 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '0')
 
 
             // rentabilidade pós-fixada
         } else if (tipoRentabilidade === "pre_radio") {
+            var descricao = '5' // LCI/LCA Pré-Fixado
 
             if (!rentabilidadePre) {
                 notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao)
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, '0')
 
         } else if (tipoRentabilidade === "ipca_radio") {
+            var descricao = '6' // LCI/LCA IPCA+
 
             if (!rentabilidadeIpca) {
                 notification(translations[selectedLanguage]['missingProfitError'])
@@ -759,10 +860,9 @@ function handleSimulation() {
 
     } else if (tipoInvestimento === "tesouro_radio") {
 
-        var descricao = 'Tesouro Direto'
-
         // rentabilidade pós-fixada
         if (tipoRentabilidade === "pos_radio") {
+            var descricao = '7' // Tesouro Direto Pós-Fixado
 
             if (!rentabilidadePos) {
                 notification(translations[selectedLanguage]['missingProfitError'])
@@ -773,19 +873,21 @@ function handleSimulation() {
             var cdiValue = selicValue - 0.1;
             var rentabilidade = rentabilidadePos * cdiValue / 100;
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, 'true')
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '1')
 
             // rentabilidade pós-fixada
         } else if (tipoRentabilidade === "pre_radio") {
+            var descricao = '8' // Tesouro Direto Pré-Fixado
 
             if (!rentabilidadePre) {
                 notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
 
-            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, 'true')
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidadePre, descricao, '1')
 
         } else if (tipoRentabilidade === "ipca_radio") {
+            var descricao = '9' // Tesouro Direto IPCA+
 
             if (!rentabilidadeIpca) {
                 notification(translations[selectedLanguage]['missingProfitError'])
@@ -796,11 +898,12 @@ function handleSimulation() {
         }
 
     } else if (tipoInvestimento === "poupanca_radio") {
+        var descricao = '10' // Poupança
 
         var descricao = 'Poupança'
 
         rentabilidade = getPoupancaRent()
-        calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao)
+        calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '0')
     }
 }
 
