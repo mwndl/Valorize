@@ -59,9 +59,9 @@ const translations = {
         "totalLiquidoResultLabel": "Total Líquido",
 
         "table_selector": "Tabela",
-        "pie_chart_selector": "Gráfico de Pizza",
+        "pie_chart_selector": "Gráfico",
         "lines_chart_selector": "Progresso",
-        "share_results": "Compartilhar Resultados",
+        "share_results": "Compartilhar",
 
         "pieChartInvestedLabel": "Investido",
         "pieChartInterestLabel": "Juros",
@@ -161,9 +161,9 @@ const translations = {
         "totalLiquidoResultLabel": "Net Amount",
 
         "table_selector": "Table",
-        "pie_chart_selector": "Pie Chart",
+        "pie_chart_selector": "Chart",
         "lines_chart_selector": "Progress",
-        "share_results": "Share Results",
+        "share_results": "Share",
 
         "pieChartInvestedLabel": "Invested",
         "pieChartInterestLabel": "Interest",
