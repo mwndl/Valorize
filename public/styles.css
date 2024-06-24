@@ -583,9 +583,9 @@ h1, p {
         font-size: 14px;
     }
 
-    #evolution_table {
+    #evolution_table, #pie_chart, #lines_chart {
         max-height: 400px;
-     }
+    }
 
 }
 
