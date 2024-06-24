@@ -6,11 +6,13 @@ const urlsToCache = [
 
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => {
-            return cache.addAll(urlsToCache);
-        })
+        caches.open(CACHE_NAME)
+            .then(cache => {
+                console.log('Cache aberto');
+                return cache.addAll(urlsToCache);
+            })
     );
-    self.skipWaiting(); // Forçar a ativação imediata após a instalação
+    self.skipWaiting(); // Força a ativação imediata após a instalação
 });
 
 self.addEventListener('activate', event => {
@@ -26,23 +28,36 @@ self.addEventListener('activate', event => {
             );
         })
     );
-    return self.clients.claim(); // Tomar controle imediato das páginas
+    return self.clients.claim(); // Toma controle imediato das páginas
 });
 
 self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request).then(response => {
-                if (!response || response.status !== 200 || response.type !== 'basic') {
+        caches.match(event.request)
+            .then(response => {
+                // Cache hit - return response
+                if (response) {
                     return response;
                 }
-                const responseToCache = response.clone();
-                caches.open(CACHE_NAME).then(cache => {
-                    cache.put(event.request, responseToCache);
-                });
-                return response;
-            });
-        })
+
+                // Faz uma requisição de rede para buscar o recurso
+                return fetch(event.request)
+                    .then(response => {
+                        // Verifica se recebemos uma resposta válida
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+
+                        // Clona a resposta para armazenar no cache
+                        const responseToCache = response.clone();
+                        caches.open(CACHE_NAME)
+                            .then(cache => {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        return response;
+                    });
+            })
     );
 });
 
