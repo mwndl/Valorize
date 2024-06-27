@@ -50,7 +50,8 @@ function changeLanguage(language) {
     const elementsToTranslate = document.querySelectorAll('[id]');
     // Feche o simulador para evitar elementos dinâmicos não traduzidos
     simularNovamenteButton();
-    setElementTitles(language)
+    setElementTitles(language);
+    showRentInputs();
 
     elementsToTranslate.forEach(element => {
         const key = element.id;
