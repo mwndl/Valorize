@@ -697,11 +697,11 @@ function hideCharts() {
 function gerarTabelaInvestimento(valorInicial, valorMensal, prazoMeses, rentabilidadeInicial) {
     var tabelaHTML = '<table id="tabela-investimento">';
     tabelaHTML += `<tr>
-        <th>Mês</th>
-        <th>Juros Mensais</th>
-        <th>Valor Aplicado</th>
-        <th>Juros Acumulados</th>
-        <th>Total Acumulado</th>
+        <th>${translations[selectedLanguage]['monthLabel']}</th>
+        <th>${translations[selectedLanguage]['monthlyInterestLabel']}</th>
+        <th>${translations[selectedLanguage]['appliedValueLabel']}</th>
+        <th>${translations[selectedLanguage]['totalInterestLabel']}</th>
+        <th>${translations[selectedLanguage]['accumulatedTotalLabel']}</th>
     </tr>`;
 
     var rentabFinal = rentabilidadeInicial / 100;
