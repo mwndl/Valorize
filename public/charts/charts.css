@@ -1780,7 +1780,7 @@ ol.charts-css li,ul.charts-css li{
     -webkit-box-pack:center;
     -ms-flex-pack:center;
     border-radius:50%;
-    border: 1px solid white;
+    border: 1px solid rgb(142, 142, 142);
     bottom:0;
     display:-webkit-box;
     display:-ms-flexbox;
@@ -1794,4 +1794,11 @@ ol.charts-css li,ul.charts-css li{
     -webkit-transform:rotate(calc(.5turn * var(--start, 0) + .5turn * var(--end, 0)));
     transform:rotate(calc(.5turn * var(--start, 0) + .5turn * var(--end, 0)));
     width:100%
+}
+
+@media (prefers-color-scheme: dark) {
+    .charts-css.pie tbody tr td .data{
+        border-radius:50%;
+        border: 1px solid rgb(255, 255, 255);
+    }
 }

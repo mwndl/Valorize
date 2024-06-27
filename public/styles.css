@@ -34,6 +34,15 @@ h1, p {
     color: #252525;
 }
 
+hr {
+    border-top: 1px solid #ccc; 
+    border-right: none; 
+    border-bottom: none; 
+    border-left: none; 
+    border-image: initial; 
+    margin: 9px 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -161,19 +170,20 @@ h1, p {
     height: 20px;
     border-radius: 50%;
     margin-right: 10px;
-    border: 1px solid white;
+    border: 1px solid rgb(142, 142, 142);
 }
+
 .blue {
     background-color: #5896fc;
 }
+
 .green {
     background-color: #70d06a;
 }
+
 .red {
     background-color: #f06a6a;
 }
-
-
 
 
  /* ****** */
@@ -450,8 +460,18 @@ h1, p {
 
 .simulator_bottom {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     margin: 0 0 10px 0;
+}
+
+#rentDescription {
+    max-width: 65%;
+    align-content: center;
+    margin: 0;
+    font-size: 0.8em;
+    text-align: start;
+    color:#aeaeae;
+    font-style: italic;
 }
 
 .simularButton {
@@ -693,6 +713,10 @@ h1, p {
         color: #ffffff;
     }
 
+    hr {
+        border-top: 1px solid rgb(100, 100, 100); 
+    }
+
     #topTitle {
         color: #f7f7f7;
     }
@@ -778,6 +802,10 @@ h1, p {
         content: "\2022";
         font-size: 18px;
         margin-right: 10px;
+    }
+
+    .legend-color {
+        border: 1px solid rgb(255, 255, 255);
     }
 
     #notification {

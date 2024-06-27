@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
     getSelic();
+    obterIPCA12();
     setLanguageBasedOnBrowser();
     applyColorScheme(); // service worker
     hasRequiredParameters()
@@ -216,18 +217,24 @@ function showRentInputs() {
                     document.getElementById('rent_pre').style.display = 'none';
                     document.getElementById('rent_ipca').style.display = 'none';
                     document.getElementById('rent_poupanca').style.display = 'none';
+                    document.getElementById('rentDescription'). textContent = `${translations[selectedLanguage]['rentDescriptionPOS'] + (selicValue - 0.1)}%`;
+
                     break;
                 case 'pre_radio':
                     document.getElementById('rent_pre').style.display = 'flex';
                     document.getElementById('rent_pos').style.display = 'none';
                     document.getElementById('rent_ipca').style.display = 'none';
                     document.getElementById('rent_poupanca').style.display = 'none';
+                    document.getElementById('rentDescription'). textContent = ''
+
                     break;
                 case 'ipca_radio':
                     document.getElementById('rent_ipca').style.display = 'flex';
                     document.getElementById('rent_pos').style.display = 'none';
                     document.getElementById('rent_pre').style.display = 'none';
                     document.getElementById('rent_poupanca').style.display = 'none';
+                    document.getElementById('rentDescription'). textContent = `${translations[selectedLanguage]['rentDescriptionIPCA']+ ipca12Value.toFixed(2)}%`;
+
                     break;
                 default:
                     document.getElementById('rent_pos').style.display = 'block';
@@ -249,6 +256,7 @@ function converterParaDuasCasas(valor) {
 }
 
 let selicValue; // Definindo a variável global
+let ipca12Value; // Definindo a variável global
 let trValue;
 let rentPoupanca;
 
@@ -270,7 +278,40 @@ async function getSelic() {
         return selicValue;
     } catch (error) {
         // Lança o erro para ser tratado pelo chamador da função
+        document.getElementById('pos_radio_display').style.display = 'none'
         throw error;
+    }
+}
+
+async function obterIPCA12() {
+    const hoje = new Date();
+    const umAnoAtras = new Date();
+    umAnoAtras.setFullYear(hoje.getFullYear() - 1);
+
+    // Formatando as datas
+    const mesAnoFinal = `${hoje.getMonth() + 1}`.padStart(2, '0') + '/' + hoje.getFullYear();
+    const mesAnoInicial = `${umAnoAtras.getMonth() + 1}`.padStart(2, '0') + '/' + umAnoAtras.getFullYear();
+    const dataInicial = `01/${mesAnoInicial}`;
+    const dataFinal = `01/${mesAnoFinal}`;
+
+    try {
+        const response = await fetch(`https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json&dataInicial=${dataInicial}&dataFinal=${dataFinal}`);
+        const data = await response.json();
+
+        // Calcular o IPCA acumulado nos últimos 12 meses de forma multiplicativa
+        let ipcaAcumulado = 1; // Começa com 1 para multiplicação
+        data.forEach(item => {
+            ipcaAcumulado *= (1 + parseFloat(item.valor) / 100); // Convertendo para decimal
+        });
+
+        // Calcular o IPCA acumulado nos últimos 12 meses em porcentagem
+        const ipca12Meses = (ipcaAcumulado - 1) * 100;
+
+        ipca12Value = ipca12Meses
+        return ipca12Meses
+    } catch (error) {
+        document.getElementById('ipca_radio_display').style.display = 'none'
+        console.error('Erro ao obter os dados do IPCA:', error);
     }
 }
 
@@ -364,6 +405,7 @@ function handleRadioChange(event) {
 }
 
 function hideRentType() {
+    document.getElementById('rentDescription'). textContent = ''
     document.getElementById('unavailable_overlay').style.display = 'block';
     const rentabilidadeRadios = document.querySelectorAll('input[name="rentabilidade_tipo"]');
     rentabilidadeRadios.forEach(radio => {
@@ -373,6 +415,7 @@ function hideRentType() {
 
 function showRendType() {
     document.getElementById('unavailable_overlay').style.display = 'none';
+    document.getElementById('rentDescription'). textContent = ''
 
     document.getElementById('rent_pos').style.display = 'none';
     document.getElementById('rent_pre').style.display = 'none';
@@ -812,8 +855,9 @@ function handleSimulation() {
                 return
             }
 
-            notification(translations[selectedLanguage]['unavailableOptionError'])
+            rentabilidade = ipca12Value + rentabilidadeIpca
 
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '1')
         }
 
         /* LCIs */
@@ -854,7 +898,9 @@ function handleSimulation() {
                 return
             }
 
-            notification(translations[selectedLanguage]['unavailableOptionError'])
+            rentabilidade = ipca12Value + rentabilidadeIpca
+
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '0')
 
         }
 
@@ -893,7 +939,10 @@ function handleSimulation() {
                 notification(translations[selectedLanguage]['missingProfitError'])
                 return
             }
-            notification(translations[selectedLanguage]['unavailableOptionError'])
+
+            rentabilidade = ipca12Value + rentabilidadeIpca
+
+            calcularInvestimento(valorInicial, valorMensal, prazoFinal, rentabilidade, descricao, '1')
 
         }
 

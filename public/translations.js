@@ -29,7 +29,7 @@ const translations = {
         "rentTypeLabel": "Tipo de rentabilidade",
         "posRadioLabel": "Pós-fixado",
         "preRadioLabel": "Pré-fixado",
-        "ipcaRadioLabel": "IPCA",
+        "ipcaRadioLabel": "IPCA+",
 
         "deadlineLabel": "Prazo",
         "yearsLabel": "Anos",
@@ -40,6 +40,9 @@ const translations = {
         "rentAnualLabel": "Rentabilidade Anual",
         "ipcaPlusLabel": "IPCA + X%",
         "poupancaLabel": "Rentabilidade Anual",
+        
+        "rentDescriptionPOS": "Considerar CDI como ",
+        "rentDescriptionIPCA": "Considerar IPCA como ",
 
         "simularButton": "Simular",
 
@@ -131,7 +134,7 @@ const translations = {
         "rentTypeLabel": "Type of yield",
         "posRadioLabel": "Post-fixed",
         "preRadioLabel": "Pre-fixed",
-        "ipcaRadioLabel": "IPCA",
+        "ipcaRadioLabel": "IPCA+",
 
         "deadlineLabel": "Term",
         "yearsLabel": "Years",
@@ -142,6 +145,9 @@ const translations = {
         "rentAnualLabel": "Annual Yield",
         "ipcaPlusLabel": "IPCA + X%",
         "poupancaLabel": "Annual Yield",
+
+        "rentDescriptionPOS": "Consider CDI as ",
+        "rentDescriptionIPCA": "Consider IPCA as ",
 
         "simularButton": "Simulate",
 

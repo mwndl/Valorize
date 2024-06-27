@@ -76,15 +76,15 @@
                     <div class="simulator_section_intern">
                         <div class="unavailable_overlay" id="unavailable_overlay" style="z-index: 1; display:none;"></div>
                         <p style="text-align: start; font-size: 22px;" id="rentTypeLabel"></p>
-                        <div class="option">
+                        <div class="option" id="pos_radio_display">
                             <input type="radio" id="pos_radio" name="rentabilidade_tipo" value="pos_radio">
                             <label for="pos_radio" id="posRadioLabel"></label>
                         </div>
-                        <div class="option">
+                        <div class="option" id="pre_radio_display">
                             <input type="radio" id="pre_radio" name="rentabilidade_tipo" value="pre_radio">
                             <label for="pre_radio" id="preRadioLabel"></label>
                         </div>
-                        <div class="option" style="display:none">
+                        <div class="option" id="ipca_radio_display">
                             <input type="radio" id="ipca_radio" name="rentabilidade_tipo" value="ipca_radio">
                             <label for="ipca_radio" id="ipcaRadioLabel"></label>
                         </div>
@@ -141,6 +141,7 @@
                 </div>
                 <div>
                     <div class="simulator_bottom">
+                        <p id="rentDescription"></p>
                         <div class="simularButton" id="simularButton"></div>
                     </div>
                 </div>
@@ -172,7 +173,7 @@
                         <p id="tipo_de_investimento_p"></p>
                     </div>
                 </div>
-                <hr style="border-top: 1px solid rgb(100, 100, 100); border-right: none; border-bottom: none; border-left: none; border-image: initial; margin: 9px 0;">
+                <hr>
                 <div class="resultado_container">
                         <div class="resultado_section_intern">
                             <label class="google_label" for="inicial" id="valorBrutoResultLabel"></label>
